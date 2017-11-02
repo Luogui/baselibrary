@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:text="相机"
+        android:id="@+id/camera"
+        android:textColor="#323232"
+        android:textSize="17sp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#f0f0f0"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:text="图库"
+        android:id="@+id/gallery"
+        android:textColor="#323232"
+        android:textSize="17sp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        />
+
+</LinearLayout>
