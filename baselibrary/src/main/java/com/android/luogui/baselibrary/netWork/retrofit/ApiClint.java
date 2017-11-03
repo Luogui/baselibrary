@@ -1,9 +1,8 @@
 package com.android.luogui.baselibrary.netWork.retrofit;
 
-import android.util.Log;
-
+import com.android.luogui.baselibrary.BuildConfig;
+import com.android.luogui.baselibrary.util.LogUtil;
 import java.util.concurrent.TimeUnit;
-
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -15,17 +14,17 @@ import retrofit2.Retrofit;
 
 public class ApiClint {
 
-    public static final String BASE_URL = "http://192.168.4.152:8090/WebDemo/";
+    public static String BASE_URL = BuildConfig.APPLICATION_ID;
 
     private static Retrofit retrofit;
 
 
-    private static Retrofit getRetrofit(){
+    protected static Retrofit getRetrofit(){
         if (retrofit==null){
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
                 @Override
                 public void log(String message) {
-                    Log.i("Log", message);
+                    LogUtil.i(message);
                 }
             });
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -43,10 +42,6 @@ public class ApiClint {
         }
 
         return retrofit;
-    }
-
-    public static ApiService getApi(){
-        return getRetrofit().create(ApiService.class);
     }
 
 }

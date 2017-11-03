@@ -65,7 +65,7 @@ public class LoadingMoreFooter extends LinearLayout {
 
         addView(progressCon);
         mText = new TextView(getContext());
-        mText.setText("正在加载...");
+        mText.setText(getContext().getString(R.string.listview_loading));
         loadingHint = (String)getContext().getText(R.string.listview_loading);
         noMoreHint = (String)getContext().getText(R.string.nomore_loading);
         loadingDoneHint = (String)getContext().getText(R.string.loading_done);
