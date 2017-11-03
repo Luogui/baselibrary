@@ -70,7 +70,7 @@ public class NetWorkUtil {
         if (isRootDirExist)
             file_dir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/apk/";
         else {
-            file_dir = "/data/data/com.gangbeng.ksbk.baseprojectlib/files/apk/";
+            file_dir = "/data/data/com.android.luogui.baselibrary/files/apk/";
         }
         return file_dir;
     }

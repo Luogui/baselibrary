@@ -10,6 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.android.luogui.baselibrary.R;
+
 
 public class LoadingMoreFooter extends LinearLayout {
 

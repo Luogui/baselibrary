@@ -24,6 +24,10 @@ public class Constant {
 
     public static int PROGRESS_BAR_COLOR = R.color.colorPrimary;
 
+    public static boolean RSA_ENCRYPT = false;  //是否使用RSA加密
+
+    public static boolean AES_ENCRYPT = false;  //是否使用AES加密
+
     /**
      * RSA公钥key
      */

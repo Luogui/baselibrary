@@ -8,8 +8,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.lg.android.base.BuildConfig;
-import com.lg.android.base.MyApplication;
+import com.android.luogui.baselibrary.MyApplication;
 
 import org.json.JSONArray;
 import org.json.JSONException;
