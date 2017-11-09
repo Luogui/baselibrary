@@ -64,4 +64,5 @@ dependencies {
     compile project(':baselibrary')
     compile 'com.jakewharton:butterknife:8.4.0'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
+    compile files('libs/open_sdk_r5788_lite.jar')
 }
