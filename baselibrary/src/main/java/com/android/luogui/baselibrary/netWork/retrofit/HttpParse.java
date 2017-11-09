@@ -30,7 +30,7 @@ public class HttpParse {
             String value = json.getString(key);
             return GsonUtil.getGson().fromJson(value,mClass);
         } catch (JSONException |JsonSyntaxException e) {
-            LogUtil.i("Log", e.toString());
+            LogUtil.i(e.toString());
         }
         return null;
     }
@@ -42,7 +42,7 @@ public class HttpParse {
             Type type = new ParamType(mClass);
             return GsonUtil.getGson().fromJson(value,type);
         } catch (JSONException|JsonSyntaxException e) {
-            Log.i("Log", e.toString());
+            LogUtil.i(e.toString());
         }
        return new ArrayList<>();
     }

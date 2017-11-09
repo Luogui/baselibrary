@@ -13,6 +13,6 @@ public class Application extends MyApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        ApiClint.BASE_URL = BuildConfig.APPLICATION_ID;
+        ApiClint.BASE_URL = "http://www.nnajlaw.com:5005/";
     }
 }

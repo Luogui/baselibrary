@@ -17,11 +17,11 @@ import java.util.List;
 public abstract class BaseListActivity<T> extends ToolbarActivity<T> {
 
     protected XRecyclerView recyclerView;
-    protected BaseRecyclerAdapter adapter;
+    protected BaseRecyclerAdapter<T> adapter;
     protected TextView tvEmpty;
     protected int initPage = 0;
     private int currentPage = initPage;
-    protected List<T> mList = new ArrayList<T>();;
+    protected List<T> mList = new ArrayList<T>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

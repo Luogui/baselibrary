@@ -42,7 +42,7 @@ public abstract class BaseLoadMoreActivity<T> extends ToolbarActivity<T> {
     }
 
     protected int getViewId() {
-        return R.layout.activity_base_list;
+        return R.layout.activity_base_list2;
     }
 
     protected void initView() {
