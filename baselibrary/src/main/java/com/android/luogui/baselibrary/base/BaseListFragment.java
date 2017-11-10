@@ -21,7 +21,7 @@ import java.util.List;
  * Created by  LuoGui on 2017/11/10.
  */
 
-public abstract class XFragment<T> extends Fragment {
+public abstract class BaseListFragment<T> extends Fragment {
 
     @Nullable
     @Override

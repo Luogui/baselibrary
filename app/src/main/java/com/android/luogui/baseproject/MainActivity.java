@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private void toStart(int i){
         switch (i){
             case 0:
-                //XFragment
+                //BaseListFragment
                 startActivity(new Intent(this, XFragmentActivity.class));
                 break;
         }
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public List<String> getList() {
         List<String> arrayList = new ArrayList<>();
-        arrayList.add("XFragment");
+        arrayList.add("BaseListFragment");
         return arrayList;
     }
 
