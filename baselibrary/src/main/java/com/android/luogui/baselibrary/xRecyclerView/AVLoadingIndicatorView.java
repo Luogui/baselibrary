@@ -239,6 +239,7 @@ public class AVLoadingIndicatorView extends View{
 //                break;
             case BallSpinFadeLoader:
                 mIndicatorController=new BallSpinFadeLoaderIndicator();
+                mIndicatorController.setTarget(this);
                 break;
 //            case LineSpinFadeLoader:
 //                mIndicatorController=new LineSpinFadeLoaderIndicator();
@@ -256,7 +257,7 @@ public class AVLoadingIndicatorView extends View{
 //                mIndicatorController=new SemiCircleSpinIndicator();
 //                break;
         }
-        mIndicatorController.setTarget(this);
+//        mIndicatorController.setTarget(this);
     }
 
     @Override

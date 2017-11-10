@@ -20,11 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".XRecycleViewActivity"></activity>
+        <activity android:name=".XRecycleViewActivity" />
 
-
-
-        <!--#######################################QQ登录#############################################-->
+        <!-- #######################################QQ登录############################################# -->
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
@@ -43,8 +41,9 @@
             android:name="com.tencent.connect.common.AssistActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <!--#######################################QQ登录#############################################-->
+        <!-- #######################################QQ登录############################################# -->
 
+        <activity android:name=".XFragment.XFragmentActivity"></activity>
     </application>
 
 </manifest>

@@ -1,12 +1,15 @@
-package com.android.luogui.baselibrary.base;
+package com.android.luogui.baseproject.XFragment;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
-
-import com.android.luogui.baselibrary.R;
+import com.android.luogui.baselibrary.base.BaseRecyclerAdapter;
 import com.android.luogui.baselibrary.util.DefaultItemDecoration;
 import com.android.luogui.baselibrary.xRecyclerView.ProgressStyle;
 import com.android.luogui.baselibrary.xRecyclerView.XRecyclerView;
@@ -14,26 +17,24 @@ import com.android.luogui.baselibrary.xRecyclerView.XRecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class BaseListActivity<T> extends ToolbarActivity<T> {
+/**
+ * describe
+ * Created by  LuoGui on 2017/11/10.
+ */
 
-    protected XRecyclerView recyclerView;
-    protected BaseRecyclerAdapter<T> adapter;
-    protected TextView tvEmpty;
-    protected int initPage = 0;
-    private int currentPage = initPage;
-    protected List<T> mList = new ArrayList<T>();
+public abstract class XFragment<T> extends Fragment {
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(getViewId());
-        setToolbarBackBtn();
-        initView();
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = LayoutInflater.from(getContext()).inflate(getViewId(), container, false);
+        initView(view);
         setAdapter();
         init();
         setDivider();
         recyclerView.setAdapter(adapter);
         firstRequest();
+        return view;
     }
 
     /**
@@ -42,6 +43,14 @@ public abstract class BaseListActivity<T> extends ToolbarActivity<T> {
     protected void firstRequest() {
         recyclerView.refresh();
     }
+
+
+    protected XRecyclerView recyclerView;
+    protected BaseRecyclerAdapter<T> adapter;
+    protected TextView tvEmpty;
+    protected int initPage = 0;
+    private int currentPage = initPage;
+    protected List<T> mList = new ArrayList<T>();
 
     /**
      * 自定义布局
@@ -53,8 +62,9 @@ public abstract class BaseListActivity<T> extends ToolbarActivity<T> {
 
     /**
      * initView
+     * @param view
      */
-    protected void initView() {
+    protected void initView(View view) {
         recyclerView = (XRecyclerView) view.findViewById(com.android.luogui.baselibrary.R.id.recycler);
         tvEmpty = (TextView) view.findViewById(com.android.luogui.baselibrary.R.id.tv_empty);
     }
@@ -90,11 +100,11 @@ public abstract class BaseListActivity<T> extends ToolbarActivity<T> {
      * 初始化recyclerView
      */
     protected void setDivider() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
         recyclerView.setLoadingMoreProgressStyle(ProgressStyle.BallSpinFadeLoader);
         recyclerView.setArrowImageView(com.android.luogui.baselibrary.R.drawable.iconfont_downgrey);
-        recyclerView.addItemDecoration(new DefaultItemDecoration(this, com.android.luogui.baselibrary.R.color.line_color, 1, 0));
+        recyclerView.addItemDecoration(new DefaultItemDecoration(getContext(), com.android.luogui.baselibrary.R.color.line_color, 1, 0));
     }
 
     /**
@@ -146,5 +156,4 @@ public abstract class BaseListActivity<T> extends ToolbarActivity<T> {
     protected void showEmpty(int visible){
         tvEmpty.setVisibility(visible);
     }
-
 }
