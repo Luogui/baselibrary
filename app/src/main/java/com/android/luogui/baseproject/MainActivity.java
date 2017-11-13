@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, getList()));
         listView.setOnItemClickListener((adapterView, view, i, l) -> toStart(i));
 
+        //http://photos.shangweiled.com/figure_2015a_0444_01.jpg,http://photos.shangweiled.com/figure_2015a_0444_02.jpg,http://photos.shangweiled.com/figure_2015a_0444_03.jpg,http://photos.shangweiled.com/figure_2015a_0444_04.jpg,http://photos.shangweiled.com/figure_2015a_0444_05.jpg,http://photos.shangweiled.com/figure_2015a_0444_06.jpg
+
     }
 
     private void toStart(int i){

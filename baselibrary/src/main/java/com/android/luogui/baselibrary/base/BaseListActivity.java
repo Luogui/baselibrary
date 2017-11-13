@@ -48,7 +48,7 @@ public abstract class BaseListActivity<T> extends ToolbarActivity<T> {
      * @return layout_id
      */
     protected int getViewId() {
-        return com.android.luogui.baselibrary.R.layout.activity_base_list;
+        return com.android.luogui.baselibrary.R.layout.activity_base_list2;
     }
 
     /**
