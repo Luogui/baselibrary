@@ -18,8 +18,8 @@ import java.util.List;
 
 public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter {
 
-    private OnItemClickListener<T> itemClick;
-    private Context context;
+    public OnItemClickListener<T> itemClick;
+    public Context context;
 
     public BaseRecyclerAdapter(Context context, List<T> mDataList){
         this.mDataList = mDataList;
