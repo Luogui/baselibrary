@@ -1,6 +1,7 @@
 package com.android.luogui.baselibrary.base;
 
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -17,8 +18,13 @@ import java.util.List;
 
 public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter {
 
-    public OnItemClickListener<T> itemClick;
+    private OnItemClickListener<T> itemClick;
+    private Context context;
 
+    public BaseRecyclerAdapter(Context context, List<T> mDataList){
+        this.mDataList = mDataList;
+        this.context = context;
+    }
 
     public void setItemClick(OnItemClickListener<T> itemClick) {
         this.itemClick = itemClick;
