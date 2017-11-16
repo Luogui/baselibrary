@@ -8,8 +8,8 @@
     <com.android.luogui.baselibrary.xRecyclerView.XRecyclerView
         android:layout_width="match_parent"
         android:id="@+id/recycler"
-        android:descendantFocusability="blocksDescendants"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content">
+    </com.android.luogui.baselibrary.xRecyclerView.XRecyclerView>
 
 
     <TextView

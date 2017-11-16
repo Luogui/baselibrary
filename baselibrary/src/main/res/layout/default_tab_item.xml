@@ -13,13 +13,13 @@
 
         <ImageView
             android:id="@android:id/icon"
-            android:layout_width="20dp"
-            android:layout_height="20dp"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
         <TextView
             android:id="@android:id/text1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="111111111111"/>
+            />
     </LinearLayout>
     <TextView
         android:id="@id/unread_num"
