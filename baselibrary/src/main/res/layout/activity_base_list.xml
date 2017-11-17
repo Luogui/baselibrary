@@ -12,6 +12,7 @@
 
         <com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView
             android:id="@+id/recycler"
+            android:descendantFocusability="blocksDescendants"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </in.srain.cube.views.ptr.PtrClassicFrameLayout>
