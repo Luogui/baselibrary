@@ -157,7 +157,7 @@ public abstract class BaseListActivity<T> extends ToolbarActivity<T> {
                 adapter.addAll(tempList);
                 recyclerView.loadMoreFinish(false, true);
             } else {
-                recyclerView.loadMoreFinish(true, false);
+                recyclerView.loadMoreFinish(false, false);
             }
         }
         currentPage ++;

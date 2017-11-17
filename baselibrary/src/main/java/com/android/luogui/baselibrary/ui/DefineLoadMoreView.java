@@ -91,11 +91,11 @@ public class DefineLoadMoreView extends LinearLayout implements SwipeMenuRecycle
             if (dataEmpty) {
                 mLoadingView.setVisibility(GONE);
                 mTvMessage.setVisibility(VISIBLE);
-                mTvMessage.setText("暂时没有数据");
+                mTvMessage.setText(context.getString(R.string.no_more_data));
             } else {
                 mLoadingView.setVisibility(GONE);
                 mTvMessage.setVisibility(VISIBLE);
-                mTvMessage.setText(context.getString(R.string.no_more_data));
+                mTvMessage.setText(context.getString(R.string.no_data));
             }
         } else {
             setVisibility(INVISIBLE);

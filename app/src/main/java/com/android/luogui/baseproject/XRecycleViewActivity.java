@@ -1,8 +1,5 @@
 package com.android.luogui.baseproject;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
 import com.android.luogui.baselibrary.base.BaseListActivity;
 import com.android.luogui.baselibrary.netWork.retrofit.ResultCallBack;
 import com.android.luogui.baselibrary.util.LogUtil;
@@ -25,7 +22,7 @@ public class XRecycleViewActivity extends BaseListActivity<NewsBean> {
     @Override
     protected void getDataList(int page) {
         Call<String> call = ApiClint.getApi().getString(page, "");
-        call.enqueue(new ResultCallBack<NewsBean>() {
+        call.enqueue(new ResultCallBack<NewsBean>(key) {
             @Override
             public void onSuccess(NewsBean newsBean) {
 

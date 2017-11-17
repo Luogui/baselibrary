@@ -18,6 +18,7 @@ package com.android.luogui.baseproject;
 
 import com.android.luogui.baselibrary.base.BaseListActivity;
 import com.android.luogui.baselibrary.netWork.retrofit.HttpParse;
+import com.android.luogui.baselibrary.netWork.retrofit.ResultCallBack;
 import com.android.luogui.baselibrary.util.LogUtil;
 import com.android.luogui.baseproject.adapter.XAdapter;
 import com.android.luogui.baseproject.bean.NewsBean;
@@ -55,5 +56,17 @@ public class SwipeActivity extends BaseListActivity<NewsBean> {
 
             }
         });
+
+//        call.enqueue(new ResultCallBack<NewsBean>("a") {
+//            @Override
+//            public void onSuccess(NewsBean newsBean) {
+//
+//            }
+//
+//            @Override
+//            public void onFailed(int code, String s) {
+//
+//            }
+//        });
     }
 }

@@ -18,9 +18,7 @@ package com.android.luogui.baselibrary.netWork.retrofit;
 
 import android.util.Base64;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.android.luogui.baselibrary.MyApplication;
 import com.android.luogui.baselibrary.constant.Constant;
 import com.android.luogui.baselibrary.decryption.AES;
 import com.android.luogui.baselibrary.decryption.RSA;
@@ -38,6 +36,14 @@ import retrofit2.Response;
  */
 
 public abstract class ResultCallBack<T> implements Callback<String> {
+
+    private String key;
+
+
+    protected ResultCallBack(String key) {
+        this.key = key;
+    }
+
     @Override
     public void onResponse(Call<String> call, Response<String> response) {
         if (null!=response.body()){
@@ -59,16 +65,12 @@ public abstract class ResultCallBack<T> implements Callback<String> {
                     ParameterizedType genericSuperclass = (ParameterizedType) getClass().getGenericSuperclass();
                     Type[] actualTypeArguments = genericSuperclass.getActualTypeArguments();
                     Type type = actualTypeArguments[0];
-                    T t = GsonUtil.getGson().fromJson(jsonObject.optString("content"),  type);
+                    T t = GsonUtil.getGson().fromJson(jsonObject.optString(key),  type);
                     if (t!=null){
                         onSuccess(t);
                     }
                 }else if (code==301){
                     //token验证失败
-                    onFailed(code, jsonObject.optString("msg"));
-//                    Activity activity = ActivityManager.getInstance().currentActivity();
-//                    activity.startActivity(new Intent(activity, RecycleActivity.class));
-                    Toast.makeText(MyApplication.getInstance(), jsonObject.optString("msg"), Toast.LENGTH_SHORT).show();
                 }
                 else {
                     onFailed(code, jsonObject.optString("msg"));
