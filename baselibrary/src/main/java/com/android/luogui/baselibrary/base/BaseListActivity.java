@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 
 import com.android.luogui.baselibrary.R;
+import com.android.luogui.baselibrary.ui.DefineLoadMoreView;
 import com.android.luogui.baselibrary.util.DefaultItemDecoration;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 
@@ -111,6 +112,9 @@ public abstract class BaseListActivity<T> extends ToolbarActivity<T> {
      * 初始化recyclerView
      */
     protected void setDivider() {
+        DefineLoadMoreView loadMoreView = new DefineLoadMoreView(this);
+        recyclerView.addFooterView(loadMoreView); // 添加为Footer。
+        recyclerView.setLoadMoreView(loadMoreView); // 设置LoadMoreView更新监听。
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DefaultItemDecoration(this, R.color.gray2_bg, 1, 0));
     }
