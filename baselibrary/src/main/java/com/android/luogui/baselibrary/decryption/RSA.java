@@ -51,7 +51,7 @@ public class RSA {
 
     private static final String RSA = "RSA";// 非对称加密密钥算法
     private static final String RSA_ECB_PADDING = "RSA/ECB/PKCS1Padding";//加密填充方式
-    public static final int DEFAULT_KEY_SIZE = 1024;//秘钥默认长度
+    private static final int DEFAULT_KEY_SIZE = 1024;//秘钥默认长度
     private static final byte[] DEFAULT_SPLIT = "#PART#".getBytes();    // 当要加密的内容超过bufferSize，则采用partSplit进行分块加密
     private static final int DEFAULT_BUFFER_SIZE = (DEFAULT_KEY_SIZE / 8) - 11;// 当前秘钥支持加密的最大字节数
 

@@ -12,6 +12,6 @@ import retrofit2.http.Query;
 
 public interface ApiService {
 
-    @POST("user/home")
-    Call<String>  getString(@Query("page") int page, @Query("uid") String uid);
+    @POST("user/figure")
+    Call<String>  getString(@Query("page") int page, @Query("type") String type);
 }

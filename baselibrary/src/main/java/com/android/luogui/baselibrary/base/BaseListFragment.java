@@ -25,12 +25,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.android.luogui.baselibrary.R;
 import com.android.luogui.baselibrary.util.DefaultItemDecoration;
-import com.android.luogui.baselibrary.xRecyclerView.ProgressStyle;
-import com.android.luogui.baselibrary.xRecyclerView.XRecyclerView;
+import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import in.srain.cube.views.ptr.PtrClassicFrameLayout;
+import in.srain.cube.views.ptr.PtrDefaultHandler;
+import in.srain.cube.views.ptr.PtrFrameLayout;
+import in.srain.cube.views.ptr.PtrHandler;
 
 /**
  * describe
@@ -38,6 +43,14 @@ import java.util.List;
  */
 
 public abstract class BaseListFragment<T> extends Fragment {
+
+    protected SwipeMenuRecyclerView recyclerView;
+    protected BaseRecyclerAdapter<T> adapter;
+    protected TextView tvEmpty;
+    protected int initPage = 0;
+    private int currentPage = initPage;
+    protected List<T> mList = new ArrayList<T>();
+    protected PtrClassicFrameLayout ptr;
 
     @Nullable
     @Override
@@ -48,61 +61,53 @@ public abstract class BaseListFragment<T> extends Fragment {
         init();
         setDivider();
         recyclerView.setAdapter(adapter);
-        firstRequest();
+        recyclerView.loadMoreFinish(false, true);
+        getDataList(initPage);
         return view;
     }
 
-    /**
-     * 第一次加载数据  是否启用自动刷新
-     */
-    protected void firstRequest() {
-        recyclerView.refresh();
-    }
-
-
-    protected XRecyclerView recyclerView;
-    protected BaseRecyclerAdapter<T> adapter;
-    protected TextView tvEmpty;
-    protected int initPage = 0;
-    private int currentPage = initPage;
-    protected List<T> mList = new ArrayList<T>();
 
     /**
      * 自定义布局
      * @return layout_id
      */
     protected int getViewId() {
-        return com.android.luogui.baselibrary.R.layout.activity_base_list;
+        return R.layout.activity_base_list;
     }
 
     /**
      * initView
-     * @param view
      */
     protected void initView(View view) {
-        recyclerView = (XRecyclerView) view.findViewById(com.android.luogui.baselibrary.R.id.recycler);
-        tvEmpty = (TextView) view.findViewById(com.android.luogui.baselibrary.R.id.tv_empty);
+        ptr = (PtrClassicFrameLayout) view.findViewById(R.id.ptr);
+        recyclerView = (SwipeMenuRecyclerView) view.findViewById(R.id.recycler);
+        tvEmpty = (TextView) view.findViewById(R.id.tv_empty);
     }
 
     /**
      * init 上下拉
      */
     protected void init() {
-
-        recyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
-            @Override
-            public void onRefresh() {
-                currentPage = 1;
-                refreshInit();
-                getDataList(currentPage);
-            }
-
+        recyclerView.setLoadMoreListener(new SwipeMenuRecyclerView.LoadMoreListener() {
             @Override
             public void onLoadMore() {
                 getDataList(currentPage);
             }
         });
 
+        ptr.setPtrHandler(new PtrHandler() {
+            @Override
+            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+                return PtrDefaultHandler.checkContentCanBePulledDown(frame, content, header);
+            }
+
+            @Override
+            public void onRefreshBegin(PtrFrameLayout frame) {
+                currentPage = initPage;
+                refreshInit();
+                getDataList(currentPage);
+            }
+        });
     }
 
     /**
@@ -116,10 +121,7 @@ public abstract class BaseListFragment<T> extends Fragment {
      */
     protected void setDivider() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
-        recyclerView.setLoadingMoreProgressStyle(ProgressStyle.BallSpinFadeLoader);
-        recyclerView.setArrowImageView(com.android.luogui.baselibrary.R.drawable.iconfont_downgrey);
-        recyclerView.addItemDecoration(new DefaultItemDecoration(getContext(), com.android.luogui.baselibrary.R.color.line_color, 1, 0));
+        recyclerView.addItemDecoration(new DefaultItemDecoration(getContext(), R.color.gray2_bg, 1, 0));
     }
 
     /**
@@ -142,23 +144,25 @@ public abstract class BaseListFragment<T> extends Fragment {
      * @param tempList list
      */
     protected void dispatch(List<T> tempList) {
-        if (currentPage==initPage) {
-            recyclerView.refreshComplete();
+        if (currentPage == initPage) {
+            ptr.refreshComplete();
             adapter.clear();
             adapter.addAll(tempList);
-            if (tempList.size()==0){
+            if (tempList.size() == 0) {
                 //无数据
+                recyclerView.loadMoreFinish(true, false);
                 showEmpty(View.VISIBLE);
-            }else {
+            } else {
                 //有数据
+                recyclerView.loadMoreFinish(false, true);
                 showEmpty(View.GONE);
             }
-        }else {
-            if (tempList.size()!=0) {
+        } else {
+            if (tempList.size() != 0) {
                 adapter.addAll(tempList);
-                recyclerView.loadMoreComplete();
-            }else {
-                recyclerView.setNoMore(true);
+                recyclerView.loadMoreFinish(false, true);
+            } else {
+                recyclerView.loadMoreFinish(true, false);
             }
         }
         currentPage ++;
@@ -171,4 +175,5 @@ public abstract class BaseListFragment<T> extends Fragment {
     protected void showEmpty(int visible){
         tvEmpty.setVisibility(visible);
     }
+
 }

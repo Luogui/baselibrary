@@ -28,13 +28,6 @@ public class BaseActivity extends AppCompatActivity {
 
     protected Context context;
     EventReceiver base_Event_Receiver;
-    BaseReadyData baseReadyData = new BaseReadyData();
-
-    protected void onReadyFinish() {
-        this.baseReadyData.onReadyFinish();
-    }
-
-
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

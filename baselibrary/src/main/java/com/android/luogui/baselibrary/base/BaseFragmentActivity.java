@@ -108,7 +108,7 @@ public class BaseFragmentActivity extends BaseActivity implements ChangeFragment
     }
 
     protected TabLayout.Tab getNewTab(int page, TabLayout tabLayout) {
-        View view = LayoutInflater.from(this.context).inflate(R.layout.default_tab_item, null);
+        View view = LayoutInflater.from(this.context).inflate(R.layout.base_tab_item, null);
         TabLayout.Tab tab = tabLayout.newTab().setCustomView(view);
 
         return tab;

@@ -43,7 +43,8 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <!-- #######################################QQ登录############################################# -->
 
-        <activity android:name=".XFragment.XFragmentActivity"></activity>
+        <activity android:name=".XFragment.XFragmentActivity" />
+        <activity android:name=".SwipeActivity"></activity>
     </application>
 
 </manifest>

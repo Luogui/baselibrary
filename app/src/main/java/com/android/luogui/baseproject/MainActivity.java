@@ -54,6 +54,10 @@ public class MainActivity extends AppCompatActivity {
                 //BaseListFragment
                 startActivity(new Intent(this, XFragmentActivity.class));
                 break;
+            case 1:
+                //BaseListFragment
+                startActivity(new Intent(this, SwipeActivity.class));
+                break;
         }
     }
 
@@ -66,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
     public List<String> getList() {
         List<String> arrayList = new ArrayList<>();
         arrayList.add("BaseListFragment");
+        arrayList.add("SwipeActivity");
         return arrayList;
     }
 

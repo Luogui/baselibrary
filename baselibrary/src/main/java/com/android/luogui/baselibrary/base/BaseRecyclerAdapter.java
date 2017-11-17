@@ -42,8 +42,6 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter {
         this.context = context;
     }
 
-    public BaseRecyclerAdapter(){}
-
     public void setItemClick(OnItemClickListener<T> itemClick) {
         this.itemClick = itemClick;
     }
