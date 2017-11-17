@@ -43,7 +43,7 @@ public abstract class BaseListActivity<T> extends ToolbarActivity<T> {
     protected int initPage = 0;
     private int currentPage = initPage;
     protected List<T> mList = new ArrayList<T>();
-    private PtrClassicFrameLayout ptr;
+    protected PtrClassicFrameLayout ptr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
