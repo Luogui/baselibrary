@@ -49,7 +49,7 @@ public abstract class BaseListFragment<T> extends Fragment {
     protected BaseRecyclerAdapter<T> adapter;
     protected TextView tvEmpty;
     protected int initPage = 0;
-    private int currentPage = initPage;
+    private int currentPage;
     protected List<T> mList = new ArrayList<T>();
     protected PtrClassicFrameLayout ptr;
 
@@ -89,6 +89,7 @@ public abstract class BaseListFragment<T> extends Fragment {
      * init 上下拉
      */
     protected void init() {
+         currentPage = initPage;
         recyclerView.setLoadMoreListener(new SwipeMenuRecyclerView.LoadMoreListener() {
             @Override
             public void onLoadMore() {
