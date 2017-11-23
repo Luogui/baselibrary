@@ -22,7 +22,7 @@ public class XRecycleViewActivity extends BaseListActivity<NewsBean> {
     @Override
     protected void getDataList(int page) {
         Call<String> call = ApiClint.getApi().getString(page, "");
-        call.enqueue(new ResultCallBack<NewsBean>(key) {
+        call.enqueue(new ResultCallBack<NewsBean>("") {
             @Override
             public void onSuccess(NewsBean newsBean) {
 
