@@ -12,4 +12,8 @@ public class ApiClint extends com.android.luogui.baselibrary.netWork.retrofit.Ap
         return getRetrofit().create(ApiService.class);
     }
 
+    @Override
+    public String getBaseUrl() {
+        return null;
+    }
 }
