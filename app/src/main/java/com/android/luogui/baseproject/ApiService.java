@@ -4,6 +4,7 @@ package com.android.luogui.baseproject;
 import retrofit2.Call;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 
 /**
  * describe

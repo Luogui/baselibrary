@@ -16,10 +16,22 @@
 
 package com.android.luogui.baselibrary.netWork.retrofit;
 
+
+import android.os.Environment;
+
 import com.android.luogui.baselibrary.BuildConfig;
 import com.android.luogui.baselibrary.util.LogUtil;
+import com.android.luogui.baselibrary.util.NetworkUtil;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
+
+import okhttp3.Cache;
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 
@@ -31,11 +43,18 @@ import retrofit2.Retrofit;
 public class ApiClint {
 
     public static String BASE_URL = BuildConfig.APPLICATION_ID;
-
     private static Retrofit retrofit;
 
+    public static Retrofit getRetrofit(){
 
-    protected static Retrofit getRetrofit(){
+
+        //缓存路径和大小
+        int DEFAULT_HTTP_CACHE_SIZE = 10 * 1024 * 1024; //缓存大小
+        File httpCacheDirectory = new File(Environment.getExternalStorageDirectory(), "HttpCache");
+        Cache cache = new Cache(httpCacheDirectory, DEFAULT_HTTP_CACHE_SIZE);
+
+
+
         if (retrofit==null){
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
                 @Override
@@ -43,21 +62,39 @@ public class ApiClint {
                     LogUtil.i(message);
                 }
             });
+
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             OkHttpClient httpClient = new OkHttpClient.Builder()
                     .addInterceptor(interceptor)
                     .connectTimeout(15, TimeUnit.SECONDS)
+                    .cache(cache)
                     .build();
-
-
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .client(httpClient)
                     .build();
-        }
 
+        }
         return retrofit;
     }
 
+    //缓存拦截器，统一缓存60s
+    static Interceptor cacheInterceptor = new Interceptor() {
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+
+            Request request = chain.request();
+            Response response = chain.proceed(request);
+
+            if (NetworkUtil.isNetworkAvailable()) {
+                int maxAge = 60*60*24*2;//缓存失效时间，单位为秒
+                return response.newBuilder()
+                        .removeHeader("Pragma")//清除头信息，因为服务器如果不支持，会返回一些干扰信息，不清除下面无法生效
+                        .header("Cache-Control", "public ,max-age=" + maxAge)
+                        .build();
+            }
+            return response;
+        }
+    };
 }

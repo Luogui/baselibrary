@@ -130,18 +130,16 @@ public abstract class BaseListFragment<T> extends Fragment {
     }
 
     /**
-     * @return void
-     * @Title: setAdapter
-     * @Description: (设置适配器)
+     * (设置适配器)
      */
     protected abstract void setAdapter();
 
     /**
-     * @return List<T>
-     * @Title: getDataList
-     * @Description: (获取数据列表)
+     *
+     * @param page 获取的页数
      */
     protected abstract void getDataList(int page);
+
 
 
     /**

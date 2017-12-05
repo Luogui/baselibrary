@@ -2,28 +2,17 @@ package com.android.luogui.baseproject;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.android.luogui.baselibrary.base.BaseListActivity;
-import com.android.luogui.baselibrary.mInterface.OnItemClickListener;
-import com.android.luogui.baselibrary.netWork.retrofit.ResultCallBack;
-import com.android.luogui.baselibrary.util.LogUtil;
 import com.android.luogui.baseproject.XFragment.XFragmentActivity;
-import com.android.luogui.baseproject.adapter.XAdapter;
-import com.android.luogui.baseproject.bean.NewsBean;
+import com.android.luogui.baseproject.slide.SlideActivity;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
                 //BaseListFragment
                 startActivity(new Intent(this, SwipeActivity.class));
                 break;
+            case 2:
+                //SlideActivity
+                startActivity(new Intent(this, SlideActivity.class));
+                break;
         }
     }
 
@@ -71,10 +64,9 @@ public class MainActivity extends AppCompatActivity {
         List<String> arrayList = new ArrayList<>();
         arrayList.add("BaseListFragment");
         arrayList.add("SwipeActivity");
+        arrayList.add("SlideActivity");
         return arrayList;
     }
-
-
 
 
 }
