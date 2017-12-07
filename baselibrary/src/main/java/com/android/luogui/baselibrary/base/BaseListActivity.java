@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 
 import com.android.luogui.baselibrary.R;
+import com.android.luogui.baselibrary.base.adapter.BaseRecyclerAdapter;
 import com.android.luogui.baselibrary.ui.DefineLoadMoreView;
 import com.android.luogui.baselibrary.util.DefaultItemDecoration;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
