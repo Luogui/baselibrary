@@ -2,9 +2,7 @@ package com.android.luogui.baseproject.XFragment;
 
 import com.android.luogui.baselibrary.base.BaseListFragment;
 import com.android.luogui.baselibrary.netWork.retrofit.HttpParse;
-import com.android.luogui.baselibrary.util.LogUtil;
 import com.android.luogui.baseproject.ApiClint;
-import com.android.luogui.baseproject.adapter.XAdapter;
 import com.android.luogui.baseproject.bean.NewsBean;
 
 import java.util.List;
@@ -23,10 +21,17 @@ public class MyFragment extends BaseListFragment<NewsBean> {
     @Override
     protected void setAdapter() {
         initPage = 1;
-        adapter = new XAdapter(getContext(), mList);
-        adapter.setItemClick((position, item) -> {
-            LogUtil.toast(item.toString());
-        });
+//        adapter = new SingleAdapter<NewsBean>(getContext(), R.layout.adapter_item_text, mList) {
+//            @Override
+//            protected void convert(BaseViewHolder holder, NewsBean newsBean, int position) {
+//                holder.setText(R.id.tv_title, newsBean.getContent());
+//            }
+//        };
+
+        adapter = new MutiAdapter(getContext(), mList);
+
+
+
     }
 
     @Override

@@ -14,31 +14,25 @@
  * limitations under the License.
  */
 
-package com.android.luogui.baselibrary.base;
+package com.android.luogui.baseproject.XFragment;
 
 import android.content.Context;
-import android.support.annotation.LayoutRes;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
+
+import com.android.luogui.baselibrary.base.BaseRecyclerAdapter;
+import com.android.luogui.baseproject.bean.NewsBean;
+
+import java.util.List;
 
 /**
- * 描述： baseViewHolder
- * Created by LuoGui on 2017/3/7.
+ * describe
+ * Created by  LuoGui on 2017/12/7.
  */
 
-public abstract class BaseViewHolder<T> extends RecyclerView.ViewHolder {
-
-    protected Context context;
-
-
-    public BaseViewHolder(Context context, ViewGroup viewGroup, @LayoutRes int layout) {
-        super(LayoutInflater.from(context).inflate(layout,viewGroup,false));
-        this.context = context;
+public class MutiAdapter extends BaseRecyclerAdapter<NewsBean> {
+    public MutiAdapter(Context context, List<NewsBean> mDataList) {
+        super(context, mDataList);
+        addItemViewDelegate(new SingleItemView());
+        addItemViewDelegate(new DoubleItemView());
     }
-
-    public abstract void setValue(T value);
-
-
 
 }
