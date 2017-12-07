@@ -32,9 +32,9 @@ public class Setting {
 
 
     @DrawableRes
-    public static int navigationIcon = 0;
+    public static int navigationIcon = R.drawable.icon_back;
 
     @ColorInt
-    public static int titleColor = -1;
+    public static int titleColor = R.color.white;
 
 }

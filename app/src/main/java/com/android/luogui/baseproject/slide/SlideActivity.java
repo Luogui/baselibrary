@@ -25,9 +25,8 @@ import android.view.Window;
 import android.widget.TextView;
 
 import com.android.luogui.baselibrary.base.ToolbarActivity;
+import com.android.luogui.baselibrary.ui.SwipeBackLayout;
 import com.android.luogui.baseproject.R;
-import com.android.luogui.baseproject.ui.SlidingFinishLayout;
-import com.android.luogui.baseproject.ui.SwipeBackLayout;
 
 public class SlideActivity extends ToolbarActivity {
 
@@ -41,20 +40,5 @@ public class SlideActivity extends ToolbarActivity {
         slidingFinishLayout.attachToActivity(this);
 
     }
-
-    // Press the back button in mobile phone
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(0, R.anim.base_slide_right_out);
-    }
-
-
-    @Override
-    public void startActivity(Intent intent) {
-        super.startActivity(intent);
-        overridePendingTransition(R.anim.base_slide_right_in, R.anim.base_slide_remain);
-    }
-
 
 }

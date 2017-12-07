@@ -3,9 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
 
    <ListView
+       android:visibility="gone"
        android:divider="@color/black"
        android:dividerHeight="1dp"
        android:id="@+id/listView"
@@ -13,5 +16,16 @@
        android:layout_height="match_parent">
    </ListView>
 
+   <com.android.luogui.baselibrary.ui.TextViewLay
+       android:id="@+id/tvl_baby"
+       app:leftText="我的娃娃"
+       android:background="@color/white"
+       app:leftIcon="@mipmap/ic_launcher"
+       app:leftTextSize="@dimen/text_medium"
+       android:layout_marginTop="128dp"
+       android:layout_width="match_parent"
+       android:layout_marginLeft="10dp"
+       android:layout_marginRight="10dp"
+       android:layout_height="44dp"/>
 
 </LinearLayout>
