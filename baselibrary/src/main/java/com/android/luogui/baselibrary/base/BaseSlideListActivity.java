@@ -17,12 +17,8 @@
 package com.android.luogui.baselibrary.base;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.luogui.baselibrary.R;
@@ -39,35 +35,29 @@ import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
 
-/**
- * describe
- * Created by  LuoGui on 2017/11/10.
- */
-
-public abstract class BaseListFragment<T> extends Fragment {
+public abstract class BaseSlideListActivity<T> extends SlideActivity<T> {
 
     protected SwipeMenuRecyclerView recyclerView;
     protected BaseRecyclerAdapter<T> adapter;
     protected TextView tvEmpty;
     protected int initPage = 0;
-    private int currentPage;
+    private int currentPage ;
     protected List<T> mList = new ArrayList<T>();
     protected PtrClassicFrameLayout ptr;
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = LayoutInflater.from(getContext()).inflate(getViewId(), container, false);
-        initView(view);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(getViewId());
+        setToolbarBackBtn();
+        initView();
         setAdapter();
         init();
         setDivider();
         recyclerView.setAdapter(adapter);
         recyclerView.loadMoreFinish(false, true);
         getDataList(initPage);
-        return view;
     }
-
 
     /**
      * 自定义布局
@@ -80,8 +70,9 @@ public abstract class BaseListFragment<T> extends Fragment {
     /**
      * initView
      */
-    protected void initView(View view) {
+    protected void initView() {
         ptr = (PtrClassicFrameLayout) view.findViewById(R.id.ptr);
+        ptr.disableWhenHorizontalMove(true);
         recyclerView = (SwipeMenuRecyclerView) view.findViewById(R.id.recycler);
         tvEmpty = (TextView) view.findViewById(R.id.tv_empty);
     }
@@ -90,7 +81,7 @@ public abstract class BaseListFragment<T> extends Fragment {
      * init 上下拉
      */
     protected void init() {
-         currentPage = initPage;
+        currentPage = initPage;
         recyclerView.setLoadMoreListener(new SwipeMenuRecyclerView.LoadMoreListener() {
             @Override
             public void onLoadMore() {
@@ -123,11 +114,11 @@ public abstract class BaseListFragment<T> extends Fragment {
      * 初始化recyclerView
      */
     protected void setDivider() {
-        DefineLoadMoreView loadMoreView = new DefineLoadMoreView(getContext());
+        DefineLoadMoreView loadMoreView = new DefineLoadMoreView(this);
         recyclerView.addFooterView(loadMoreView); // 添加为Footer。
         recyclerView.setLoadMoreView(loadMoreView); // 设置LoadMoreView更新监听。
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.addItemDecoration(new DefaultItemDecoration(getContext(), R.color.gray2_bg, 1, 0));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new DefaultItemDecoration(this, R.color.gray2_bg, 1, 0));
     }
 
     /**
@@ -140,7 +131,6 @@ public abstract class BaseListFragment<T> extends Fragment {
      * @param page 获取的页数
      */
     protected abstract void getDataList(int page);
-
 
 
     /**
@@ -166,7 +156,7 @@ public abstract class BaseListFragment<T> extends Fragment {
                 adapter.addAll(tempList);
                 recyclerView.loadMoreFinish(false, true);
             } else {
-                recyclerView.loadMoreFinish(true, false);
+                recyclerView.loadMoreFinish(false, false);
             }
         }
         currentPage ++;

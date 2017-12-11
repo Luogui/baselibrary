@@ -2,7 +2,7 @@ package com.android.luogui.baseproject.adapter;
 
 import android.content.Context;
 
-import com.android.luogui.baselibrary.base.BaseRecyclerAdapter;
+import com.android.luogui.baselibrary.base.adapter.BaseRecyclerAdapter;
 import com.android.luogui.baseproject.bean.NewsBean;
 
 import java.util.List;

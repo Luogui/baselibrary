@@ -14,26 +14,25 @@
  * limitations under the License.
  */
 
-package com.android.luogui.baseproject.XFragment;
+package com.android.luogui.baselibrary.base;
 
-import android.content.Context;
+import android.os.Bundle;
+import android.view.LayoutInflater;
 
+import com.android.luogui.baselibrary.R;
+import com.android.luogui.baselibrary.ui.SwipeBackLayout;
 
-import com.android.luogui.baselibrary.base.adapter.BaseRecyclerAdapter;
-import com.android.luogui.baseproject.bean.NewsBean;
+public class SlideActivity<T> extends ToolbarActivity<T> {
 
-import java.util.List;
+    protected SwipeBackLayout slidingFinishLayout;
 
-/**
- * describe
- * Created by  LuoGui on 2017/12/7.
- */
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        slidingFinishLayout = (SwipeBackLayout) LayoutInflater.from(this).inflate(
+                R.layout.activity_slide, null);
+        slidingFinishLayout.attachToActivity(this);
 
-public class MutiAdapter extends BaseRecyclerAdapter<NewsBean> {
-    public MutiAdapter(Context context, List<NewsBean> mDataList) {
-        super(context, mDataList);
-        addItemViewDelegate(new SingleItemView());
-        addItemViewDelegate(new DoubleItemView());
     }
 
 }

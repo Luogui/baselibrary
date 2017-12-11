@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.android.luogui.baselibrary.util.DialogUtil;
 import com.android.luogui.baseproject.XFragment.XFragmentActivity;
 import com.android.luogui.baseproject.slide.SlideActivity;
 import com.tencent.tauth.IUiListener;
@@ -49,7 +50,13 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 2:
                 //SlideActivity
-                startActivity(new Intent(this, SlideActivity.class));
+//                startActivity(new Intent(this, SlideActivity.class));
+                DialogUtil.showTip(this, "提示", "是否兑换", new DialogUtil.DialogResult() {
+                    @Override
+                    public void result(String s) {
+
+                    }
+                });
                 break;
         }
     }

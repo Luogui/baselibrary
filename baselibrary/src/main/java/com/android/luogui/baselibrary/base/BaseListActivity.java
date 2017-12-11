@@ -168,6 +168,7 @@ public abstract class BaseListActivity<T> extends ToolbarActivity<T> {
      * @param visible visible
      */
     protected void showEmpty(int visible){
+        if (null==tvEmpty) return;
         tvEmpty.setVisibility(visible);
     }
 

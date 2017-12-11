@@ -16,8 +16,8 @@
 
 package com.android.luogui.baseproject.XFragment;
 
-import com.android.luogui.baselibrary.base.BaseViewHolder;
-import com.android.luogui.baselibrary.base.ItemViewDelegate;
+import com.android.luogui.baselibrary.base.adapter.BaseViewHolder;
+import com.android.luogui.baselibrary.base.adapter.ItemViewDelegate;
 import com.android.luogui.baseproject.R;
 import com.android.luogui.baseproject.bean.NewsBean;
 
