@@ -57,19 +57,27 @@ public class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHolder>
 
     public void add(T item) {
         mDataList.add(item);
-        notifyDataSetChanged();
+        notifyData();
     }
 
     public void add(int index, T item) {
         mDataList.add(index, item);
-        notifyDataSetChanged();
+        notifyData();
     }
 
     public void addAll(Collection<? extends T> collection) {
         if (collection != null) {
             mDataList.addAll(collection);
-            notifyDataSetChanged();
+            notifyData();
         }
+    }
+
+    private void notifyData(){
+        new Runnable() {
+            public void run() {
+                notifyItemInserted(getItemCount() - 1);
+            }
+        };
     }
 
     public void addAll(T... list) {
@@ -78,12 +86,12 @@ public class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHolder>
 
     public void clear() {
         mDataList.clear();
-        notifyDataSetChanged();
+        notifyData();
     }
 
     public void remove(int position) {
         mDataList.remove(position);
-        notifyDataSetChanged();
+        notifyData();
     }
 
 
