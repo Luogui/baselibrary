@@ -77,7 +77,7 @@ public class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHolder>
             public void run() {
                 notifyItemInserted(getItemCount() - 1);
             }
-        };
+        }.run();
     }
 
     public void addAll(T... list) {

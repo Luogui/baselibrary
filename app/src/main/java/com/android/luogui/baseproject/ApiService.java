@@ -2,6 +2,9 @@ package com.android.luogui.baseproject;
 
 
 import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 import retrofit2.http.Url;
@@ -13,6 +16,7 @@ import retrofit2.http.Url;
 
 public interface ApiService {
 
+    @FormUrlEncoded
     @POST("user/figure")
-    Call<String>  getString(@Query("page") int page, @Query("type") String type);
+    Call<String>  getString(@Field("page") int page, @Field("type") String type);
 }
