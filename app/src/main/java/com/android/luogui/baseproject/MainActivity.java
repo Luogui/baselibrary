@@ -57,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 });
+            case 3:
+                //SlideActivity
+                startActivity(new Intent(this, CatchRecordActivity.class));
                 break;
         }
     }
@@ -72,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         arrayList.add("BaseListFragment");
         arrayList.add("SwipeActivity");
         arrayList.add("SlideActivity");
+        arrayList.add("test");
         return arrayList;
     }
 

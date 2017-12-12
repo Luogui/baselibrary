@@ -45,6 +45,7 @@
 
         <activity android:name=".XFragment.XFragmentActivity" />
         <activity android:name=".SwipeActivity" />
+        <activity android:name=".CatchRecordActivity" />
         <activity android:name=".slide.SlideActivity"
             android:theme="@android:style/Theme.Translucent"/>
     </application>

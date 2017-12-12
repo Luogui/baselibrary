@@ -17,6 +17,7 @@
 package com.android.luogui.baselibrary.base;
 
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.TextView;
@@ -116,10 +117,15 @@ public abstract class BaseListActivity<T> extends ToolbarActivity<T> {
      */
     protected void setDivider() {
         DefineLoadMoreView loadMoreView = new DefineLoadMoreView(this);
+        setLoadMoreBg(loadMoreView);
         recyclerView.addFooterView(loadMoreView); // 添加为Footer。
         recyclerView.setLoadMoreView(loadMoreView); // 设置LoadMoreView更新监听。
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DefaultItemDecoration(this, R.color.gray2_bg, 1, 0));
+    }
+
+    protected void setLoadMoreBg(DefineLoadMoreView loadMoreView){
+
     }
 
     /**

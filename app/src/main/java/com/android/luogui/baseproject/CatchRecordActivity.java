@@ -16,40 +16,39 @@
 
 package com.android.luogui.baseproject;
 
+
 import com.android.luogui.baselibrary.base.BaseListActivity;
 import com.android.luogui.baselibrary.base.adapter.BaseViewHolder;
 import com.android.luogui.baselibrary.base.adapter.SingleAdapter;
 import com.android.luogui.baselibrary.netWork.retrofit.HttpParse;
-import com.android.luogui.baselibrary.netWork.retrofit.ResultCallBack;
-import com.android.luogui.baselibrary.util.LogUtil;
-import com.android.luogui.baseproject.adapter.XAdapter;
 import com.android.luogui.baseproject.bean.NewsBean;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SwipeActivity extends BaseListActivity<NewsBean> {
+public class CatchRecordActivity extends BaseListActivity<NewsBean> {
 
 
     @Override
     protected void setAdapter() {
         initPage = 1;
-        adapter = new SingleAdapter<NewsBean>(this, R.layout.adapter_item_text, mList) {
+        setIcon(R.drawable.icon_back);
+        setTitle("抓取记录");
+        adapter = new SingleAdapter<NewsBean>(context, R.layout.adapter_item_catch, mList) {
             @Override
-            protected void convert(BaseViewHolder holder, NewsBean newsBean, int position) {
+            protected void convert(BaseViewHolder baseViewHolder, NewsBean catchRecordBean, int i) {
 
             }
         };
-        adapter.setItemClick((position, item) -> {
-            LogUtil.toast(item.toString());
-        });
     }
 
     @Override
-    protected void getDataList(int page) {
-        Call<String> call = ApiClint.getApi().getString(page, "性感");
+    protected void getDataList(int i) {
+        Call<String> call = ApiClint.getApi().getString(i, "性感");
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -63,17 +62,5 @@ public class SwipeActivity extends BaseListActivity<NewsBean> {
 
             }
         });
-
-//        call.enqueue(new ResultCallBack<NewsBean>("a") {
-//            @Override
-//            public void onSuccess(NewsBean newsBean) {
-//
-//            }
-//
-//            @Override
-//            public void onFailed(int code, String s) {
-//
-//            }
-//        });
     }
 }

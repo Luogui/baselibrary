@@ -17,6 +17,7 @@
 package com.android.luogui.baselibrary.ui;
 
 import android.content.Context;
+import android.support.annotation.ColorRes;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
@@ -63,7 +64,12 @@ public class DefineLoadMoreView extends LinearLayout implements SwipeMenuRecycle
         int color3 = ContextCompat.getColor(getContext(), R.color.colorAccent);
 
         mLoadingView.setCircleColors(color1, color2, color3);
+        setBackgroundColor(ContextCompat.getColor(context, R.color.gray_bg));
         setOnClickListener(this);
+    }
+
+    public void setBg(@ColorRes int colorId){
+        setBackgroundColor(ContextCompat.getColor(context, colorId));
     }
 
     /**
