@@ -8,7 +8,6 @@ import android.widget.ListView;
 
 import com.android.luogui.baselibrary.util.DialogUtil;
 import com.android.luogui.baseproject.XFragment.XFragmentActivity;
-import com.android.luogui.baseproject.slide.SlideActivity;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 
@@ -49,8 +48,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this, SwipeActivity.class));
                 break;
             case 2:
-                //SlideActivity
-//                startActivity(new Intent(this, SlideActivity.class));
                 DialogUtil.showTip(this, "提示", "是否兑换", new DialogUtil.DialogResult() {
                     @Override
                     public void result(String s) {
@@ -58,8 +55,10 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
             case 3:
-                //SlideActivity
                 startActivity(new Intent(this, CatchRecordActivity.class));
+                break;
+            case 4:
+                startActivity(new Intent(this, EmptyActivity.class));
                 break;
         }
     }
@@ -74,8 +73,9 @@ public class MainActivity extends AppCompatActivity {
         List<String> arrayList = new ArrayList<>();
         arrayList.add("BaseListFragment");
         arrayList.add("SwipeActivity");
-        arrayList.add("SlideActivity");
+        arrayList.add("222");
         arrayList.add("test");
+        arrayList.add("test2");
         return arrayList;
     }
 

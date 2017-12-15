@@ -43,11 +43,14 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <!-- #######################################QQ登录############################################# -->
 
-        <activity android:name=".XFragment.XFragmentActivity" />
+        <activity
+            android:name=".XFragment.XFragmentActivity"
+            android:theme="@style/TransparentAppTheme" />
         <activity android:name=".SwipeActivity" />
-        <activity android:name=".CatchRecordActivity" />
-        <activity android:name=".slide.SlideActivity"
-            android:theme="@android:style/Theme.Translucent"/>
+        <activity
+            android:name=".CatchRecordActivity"
+            android:theme="@style/TransparentAppTheme" />
+        <activity android:name=".EmptyActivity"></activity>
     </application>
 
 </manifest>

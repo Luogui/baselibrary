@@ -50,8 +50,7 @@ public abstract class BaseListActivity<T> extends ToolbarActivity<T> {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getViewId());
-        setToolbarBackBtn();
+        setContentView(getViewId(), isShowTitle());
         initView();
         setAdapter();
         init();
@@ -67,6 +66,10 @@ public abstract class BaseListActivity<T> extends ToolbarActivity<T> {
      */
     protected int getViewId() {
         return R.layout.activity_base_list;
+    }
+
+    protected boolean isShowTitle(){
+        return true;
     }
 
     /**

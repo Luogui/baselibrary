@@ -18,6 +18,7 @@ package com.android.luogui.baseproject;
 
 
 import com.android.luogui.baselibrary.base.BaseListActivity;
+import com.android.luogui.baselibrary.base.BaseSlideListActivity;
 import com.android.luogui.baselibrary.base.adapter.BaseViewHolder;
 import com.android.luogui.baselibrary.base.adapter.SingleAdapter;
 import com.android.luogui.baselibrary.netWork.retrofit.HttpParse;
@@ -36,14 +37,19 @@ public class CatchRecordActivity extends BaseListActivity<NewsBean> {
     @Override
     protected void setAdapter() {
         initPage = 1;
-        setIcon(R.drawable.icon_back);
-        setTitle("抓取记录");
+//        setIcon(R.drawable.icon_back);
+//        setTitle("抓取记录");
         adapter = new SingleAdapter<NewsBean>(context, R.layout.adapter_item_catch, mList) {
             @Override
             protected void convert(BaseViewHolder baseViewHolder, NewsBean catchRecordBean, int i) {
 
             }
         };
+    }
+
+    @Override
+    protected boolean isShowTitle() {
+        return false;
     }
 
     @Override

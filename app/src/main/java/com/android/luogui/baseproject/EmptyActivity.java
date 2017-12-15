@@ -14,31 +14,17 @@
  * limitations under the License.
  */
 
-package com.android.luogui.baseproject.slide;
+package com.android.luogui.baseproject;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Window;
-import android.widget.TextView;
 
 import com.android.luogui.baselibrary.base.ToolbarActivity;
-import com.android.luogui.baselibrary.ui.SwipeBackLayout;
-import com.android.luogui.baseproject.R;
 
-public class SlideActivity extends ToolbarActivity {
-
-    protected SwipeBackLayout slidingFinishLayout;
+public class EmptyActivity extends ToolbarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        slidingFinishLayout = (SwipeBackLayout) LayoutInflater.from(this).inflate(
-                R.layout.activity_slide, null);
-        slidingFinishLayout.attachToActivity(this);
-
+        setContentView(R.layout.activity_empty, false);
     }
-
 }

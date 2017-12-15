@@ -49,7 +49,6 @@ public abstract class BaseSlideListActivity<T> extends SlideActivity<T> {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getViewId(), isShowTitle());
-        setToolbarBackBtn();
         initView();
         setAdapter();
         init();
