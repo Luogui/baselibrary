@@ -48,7 +48,7 @@ public abstract class BaseSlideListActivity<T> extends SlideActivity<T> {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getViewId());
+        setContentView(getViewId(), isShowTitle());
         setToolbarBackBtn();
         initView();
         setAdapter();
@@ -65,6 +65,10 @@ public abstract class BaseSlideListActivity<T> extends SlideActivity<T> {
      */
     protected int getViewId() {
         return R.layout.activity_base_list;
+    }
+
+    protected boolean isShowTitle(){
+        return true;
     }
 
     /**
@@ -115,10 +119,19 @@ public abstract class BaseSlideListActivity<T> extends SlideActivity<T> {
      */
     protected void setDivider() {
         DefineLoadMoreView loadMoreView = new DefineLoadMoreView(this);
+        setLoadMoreBg(loadMoreView);
         recyclerView.addFooterView(loadMoreView); // 添加为Footer。
         recyclerView.setLoadMoreView(loadMoreView); // 设置LoadMoreView更新监听。
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DefaultItemDecoration(this, R.color.gray2_bg, 1, 0));
+    }
+
+    /**
+     * 设置加载更多 背景
+     * @param loadMoreView load
+     */
+    protected void setLoadMoreBg(DefineLoadMoreView loadMoreView){
+
     }
 
     /**

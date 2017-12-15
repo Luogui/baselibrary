@@ -124,6 +124,10 @@ public abstract class BaseListActivity<T> extends ToolbarActivity<T> {
         recyclerView.addItemDecoration(new DefaultItemDecoration(this, R.color.gray2_bg, 1, 0));
     }
 
+    /**
+     * 设置加载更多 背景
+     * @param loadMoreView load
+     */
     protected void setLoadMoreBg(DefineLoadMoreView loadMoreView){
 
     }
