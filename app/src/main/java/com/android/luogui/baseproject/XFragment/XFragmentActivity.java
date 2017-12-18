@@ -11,9 +11,10 @@ public class XFragmentActivity extends SlideActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_xfragment);
+        setContentView(R.layout.activity_xfragment, false);
 
         MyFragment myFragment = new MyFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.framelayout, myFragment).commit();
     }
+
 }

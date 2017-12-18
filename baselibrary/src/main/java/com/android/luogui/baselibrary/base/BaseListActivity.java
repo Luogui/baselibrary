@@ -76,10 +76,10 @@ public abstract class BaseListActivity<T> extends ToolbarActivity<T> {
      * initView
      */
     protected void initView() {
-        ptr = (PtrClassicFrameLayout) view.findViewById(R.id.ptr);
+        ptr = (PtrClassicFrameLayout) findViewById(R.id.ptr);
         ptr.disableWhenHorizontalMove(true);
-        recyclerView = (SwipeMenuRecyclerView) view.findViewById(R.id.recycler);
-        tvEmpty = (TextView) view.findViewById(R.id.tv_empty);
+        recyclerView = (SwipeMenuRecyclerView) findViewById(R.id.recycler);
+        tvEmpty = (TextView) findViewById(R.id.tv_empty);
     }
 
     /**

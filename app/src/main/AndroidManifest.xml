@@ -50,7 +50,7 @@
         <activity
             android:name=".CatchRecordActivity"
             android:theme="@style/TransparentAppTheme" />
-        <activity android:name=".EmptyActivity"></activity>
+        <activity android:name=".EmptyActivity" android:theme="@style/TransparentAppTheme"/>
     </application>
 
 </manifest>

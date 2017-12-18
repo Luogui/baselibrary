@@ -42,37 +42,32 @@ public class ToolbarActivity<T> extends BaseActivity {
     private ViewGroup.LayoutParams LAYOUT_PARAMS = new ViewGroup.LayoutParams(-1, -1);
     Toolbar toolbar;
     TextView toolbar_title;
-    LinearLayout view;
 
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(1);
     }
 
-    public void setContentView(@LayoutRes int layoutResID)
-    {
+    public void setContentView(@LayoutRes int layoutResID) {
         setContentView(layoutResID, true);
     }
 
-    public void setContentView(@LayoutRes int layoutResID, boolean hasToolbar)
-    {
+    public void setContentView(@LayoutRes int layoutResID, boolean hasToolbar) {
         if (hasToolbar) {
-            this.view = ((LinearLayout) LayoutInflater.from(this.context).inflate(R.layout.base_layout, null, false));
-            this.toolbar = ((Toolbar)this.view.findViewById(R.id.toolbar));
+            LinearLayout view = ((LinearLayout) LayoutInflater.from(this.context).inflate(R.layout.base_layout, null, false));
+            this.toolbar = ((Toolbar) view.findViewById(R.id.toolbar));
             this.toolbar.setTitle("");
-            this.toolbar_title = ((TextView)this.view.findViewById(R.id.toobar_title));
+            this.toolbar_title = ((TextView) view.findViewById(R.id.toobar_title));
             setSupportActionBar(this.toolbar);
-            ViewGroup base_vg = (ViewGroup)this.view.findViewById(R.id.base_content);
+            ViewGroup base_vg = (ViewGroup) view.findViewById(R.id.base_content);
             base_vg.addView(getLayoutInflater().inflate(layoutResID, null), this.LAYOUT_PARAMS);
-            super.setContentView(this.view);
+            super.setContentView(view);
         } else {
             super.setContentView(layoutResID);
         }
     }
 
-    protected void setToolbarBackBtn()
-    {
+    protected void setToolbarBackBtn() {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -81,6 +76,7 @@ public class ToolbarActivity<T> extends BaseActivity {
         this.toolbar_title.setText(title);
         this.toolbar_title.setTextColor(Setting.titleColor);
     }
+
     public void setTitle(@StringRes int title) {
         setTitle(getString(title));
     }
@@ -89,8 +85,7 @@ public class ToolbarActivity<T> extends BaseActivity {
         setTitle(getString(title), hasBack);
     }
 
-    public void setTitle(CharSequence title, boolean hasBack)
-    {
+    public void setTitle(CharSequence title, boolean hasBack) {
         setTitle(title);
         if (hasBack) {
             setToolbarBackBtn();
@@ -99,8 +94,7 @@ public class ToolbarActivity<T> extends BaseActivity {
         }
     }
 
-    protected Toolbar getToolbar()
-    {
+    protected Toolbar getToolbar() {
         return this.toolbar;
     }
 
@@ -112,8 +106,7 @@ public class ToolbarActivity<T> extends BaseActivity {
         this.toolbar.setNavigationIcon(resId);
     }
 
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
+    public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == 16908332) {
             finish();
             return true;

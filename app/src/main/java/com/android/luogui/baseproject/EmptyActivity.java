@@ -18,9 +18,9 @@ package com.android.luogui.baseproject;
 
 import android.os.Bundle;
 
-import com.android.luogui.baselibrary.base.ToolbarActivity;
+import com.android.luogui.baselibrary.base.SlideActivity;
 
-public class EmptyActivity extends ToolbarActivity {
+public class EmptyActivity extends SlideActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

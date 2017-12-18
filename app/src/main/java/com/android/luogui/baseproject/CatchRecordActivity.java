@@ -31,7 +31,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CatchRecordActivity extends BaseListActivity<NewsBean> {
+public class CatchRecordActivity extends BaseSlideListActivity<NewsBean> {
 
 
     @Override
