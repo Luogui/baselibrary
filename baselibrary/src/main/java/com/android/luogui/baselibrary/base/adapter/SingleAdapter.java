@@ -27,18 +27,14 @@ import java.util.List;
  */
 public abstract class SingleAdapter<T> extends BaseRecyclerAdapter<T>
 {
-    protected Context mContext;
     protected int mLayoutId;
-    protected List<T> mDatas;
     protected LayoutInflater mInflater;
 
     public SingleAdapter(final Context context, final int layoutId, List<T> datas)
     {
         super(context, datas);
-        mContext = context;
         mInflater = LayoutInflater.from(context);
         mLayoutId = layoutId;
-        mDatas = datas;
 
         addItemViewDelegate(new ItemViewDelegate<T>()
         {
