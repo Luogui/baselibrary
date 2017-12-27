@@ -137,12 +137,12 @@ public class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHolder>
         ItemViewDelegate itemViewDelegate = mItemViewDelegateManager.getItemViewDelegate(viewType);
         int layoutId = itemViewDelegate.getItemViewLayoutId();
         BaseViewHolder holder = BaseViewHolder.createViewHolder(context, parent, layoutId);
-        onViewHolderCreated(holder,holder.getConvertView());
+        onViewHolderCreated(holder,holder.getConvertView(), viewType);
         setListener(parent, holder, viewType);
         return holder;
     }
 
-    public void onViewHolderCreated(BaseViewHolder holder,View itemView){
+    public void onViewHolderCreated(BaseViewHolder holder,View itemView, int viewType){
 
     }
 
@@ -179,4 +179,8 @@ public class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHolder>
         return this;
     }
 
+
+    public List<T> getDataList() {
+        return mDataList;
+    }
 }

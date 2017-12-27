@@ -22,6 +22,7 @@ import com.android.luogui.baselibrary.base.BaseSlideListActivity;
 import com.android.luogui.baselibrary.base.adapter.BaseViewHolder;
 import com.android.luogui.baselibrary.base.adapter.SingleAdapter;
 import com.android.luogui.baselibrary.netWork.retrofit.HttpParse;
+import com.android.luogui.baseproject.adapter.TestMultiAdapter;
 import com.android.luogui.baseproject.bean.NewsBean;
 
 import java.util.ArrayList;
@@ -39,12 +40,7 @@ public class CatchRecordActivity extends BaseSlideListActivity<NewsBean> {
         initPage = 1;
 //        setIcon(R.drawable.icon_back);
 //        setTitle("抓取记录");
-        adapter = new SingleAdapter<NewsBean>(context, R.layout.adapter_item_catch, mList) {
-            @Override
-            protected void convert(BaseViewHolder baseViewHolder, NewsBean catchRecordBean, int i) {
-
-            }
-        };
+        adapter = new TestMultiAdapter(context, mList);
     }
 
     @Override
