@@ -17,23 +17,16 @@
 package com.android.luogui.baselibrary.netWork.retrofit;
 
 
-import android.os.Environment;
 
-import com.android.luogui.baselibrary.BuildConfig;
 import com.android.luogui.baselibrary.util.LogUtil;
-import com.android.luogui.baselibrary.util.NetworkUtil;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.Cache;
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * describe 网络请求封装
@@ -42,59 +35,70 @@ import retrofit2.Retrofit;
 
 public class ApiClint {
 
-    public static String BASE_URL = BuildConfig.APPLICATION_ID;
-    private static Retrofit retrofit;
-
-    public static Retrofit getRetrofit(){
-
-
-        //缓存路径和大小
-        int DEFAULT_HTTP_CACHE_SIZE = 10 * 1024 * 1024; //缓存大小
-        File httpCacheDirectory = new File(Environment.getExternalStorageDirectory(), "HttpCache");
-        Cache cache = new Cache(httpCacheDirectory, DEFAULT_HTTP_CACHE_SIZE);
-
-
-
-        if (retrofit==null){
-            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-                @Override
-                public void log(String message) {
-                    LogUtil.i(message);
-                }
-            });
-
-            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-            OkHttpClient httpClient = new OkHttpClient.Builder()
-                    .addInterceptor(interceptor)
-                    .connectTimeout(15, TimeUnit.SECONDS)
-                    .cache(cache)
-                    .build();
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .addConverterFactory(ScalarsConverterFactory.create())
-                    .client(httpClient)
-                    .build();
-
+    private static final int TIMEOUT_READ = 20;
+    private static final int TIMEOUT_CONNECTION = 10;
+    private static final HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+        @Override
+        public void log(String message) {
+            LogUtil.i(message);
         }
-        return retrofit;
+    }).setLevel(HttpLoggingInterceptor.Level.BODY);
+    public static String BASE_URL = "";
+
+    private static CacheInterceptor cacheInterceptor = new CacheInterceptor();
+    private static OkHttpClient okHttpClient = new OkHttpClient.Builder()
+            //SSL证书
+            .sslSocketFactory(TrustManager.getUnsafeOkHttpClient())
+            .hostnameVerifier(org.apache.http.conn.ssl.SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
+            //打印日志
+            .addInterceptor(interceptor)
+            //设置Cache拦截器
+            .addNetworkInterceptor(cacheInterceptor)
+            .addInterceptor(cacheInterceptor)
+            .cache(HttpCache.getCache())
+            //time out
+            .connectTimeout(TIMEOUT_CONNECTION, TimeUnit.SECONDS)
+            .readTimeout(TIMEOUT_READ, TimeUnit.SECONDS)
+            .writeTimeout(TIMEOUT_READ, TimeUnit.SECONDS)
+            //失败重连
+            .retryOnConnectionFailure(true)
+            .build();
+
+    public static <T> T createApi(Class<T> clazz, String url) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .client(okHttpClient)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        return retrofit.create(clazz);
     }
 
-    //缓存拦截器，统一缓存60s
-    static Interceptor cacheInterceptor = new Interceptor() {
-        @Override
-        public Response intercept(Chain chain) throws IOException {
+    public static <T> T createApi(Class<T> clazz) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .client(okHttpClient)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        return retrofit.create(clazz);
+    }
 
-            Request request = chain.request();
-            Response response = chain.proceed(request);
+    public static <T> T createApiString(Class<T> clazz, String url) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .client(okHttpClient)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .build();
+        return retrofit.create(clazz);
+    }
 
-            if (NetworkUtil.isNetworkAvailable()) {
-                int maxAge = 60*60*24*2;//缓存失效时间，单位为秒
-                return response.newBuilder()
-                        .removeHeader("Pragma")//清除头信息，因为服务器如果不支持，会返回一些干扰信息，不清除下面无法生效
-                        .header("Cache-Control", "public ,max-age=" + maxAge)
-                        .build();
-            }
-            return response;
-        }
-    };
+    public static <T> T createApiString(Class<T> clazz) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .client(okHttpClient)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .build();
+        return retrofit.create(clazz);
+    }
 }

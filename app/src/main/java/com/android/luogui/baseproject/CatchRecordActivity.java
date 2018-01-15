@@ -17,52 +17,46 @@
 package com.android.luogui.baseproject;
 
 
-import com.android.luogui.baselibrary.base.BaseListActivity;
 import com.android.luogui.baselibrary.base.BaseSlideListActivity;
 import com.android.luogui.baselibrary.base.adapter.BaseViewHolder;
 import com.android.luogui.baselibrary.base.adapter.SingleAdapter;
-import com.android.luogui.baselibrary.netWork.retrofit.HttpParse;
-import com.android.luogui.baseproject.adapter.TestMultiAdapter;
-import com.android.luogui.baseproject.bean.NewsBean;
+import com.android.luogui.baselibrary.netWork.retrofit.ApiClint;
+import com.android.luogui.baseproject.bean.NewsBean2;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
-public class CatchRecordActivity extends BaseSlideListActivity<NewsBean> {
+public class CatchRecordActivity extends BaseSlideListActivity<NewsBean2.ResBean> {
 
 
     @Override
     protected void setAdapter() {
         initPage = 1;
-//        setIcon(R.drawable.icon_back);
-//        setTitle("抓取记录");
-        adapter = new TestMultiAdapter(context, mList);
+        setIcon(R.drawable.icon_back);
+        setTitle("抓取记录");
+        adapter = new SingleAdapter<NewsBean2.ResBean>(context, R.layout.adapter_item_text, mList) {
+            @Override
+            protected void convert(BaseViewHolder holder, NewsBean2.ResBean res, int position) {
+                holder.setText(R.id.tv_title, res.getContent());
+            }
+        };
     }
 
-    @Override
-    protected boolean isShowTitle() {
-        return false;
-    }
 
     @Override
     protected void getDataList(int i) {
-        Call<String> call = ApiClint.getApi().getString(i, "性感");
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                List<NewsBean> newsBeanList = HttpParse
-                        .parseArrayObject(response.body(), "res", NewsBean.class);
-                dispatch(newsBeanList);
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-
-            }
-        });
+        ApiClint.createApi(ApiService.class)
+                .getString2(i, "性感")
+                .map(newsBean2 -> {
+                    if (newsBean2.getStatus().equals("success")) {
+                        return newsBean2.getRes();
+                    }
+                    return new ArrayList<NewsBean2.ResBean>();
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(resBeen -> dispatch(resBeen));
     }
 }

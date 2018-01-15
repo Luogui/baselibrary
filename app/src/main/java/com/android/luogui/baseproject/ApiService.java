@@ -1,6 +1,11 @@
 package com.android.luogui.baseproject;
 
 
+import com.android.luogui.baseproject.bean.NewsBean;
+import com.android.luogui.baseproject.bean.NewsBean2;
+
+
+import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -19,4 +24,8 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("user/figure")
     Call<String>  getString(@Field("page") int page, @Field("type") String type);
+
+    @FormUrlEncoded
+    @POST("user/figure")
+    Observable<NewsBean2> getString2(@Field("page") int page, @Field("type") String type);
 }
