@@ -17,7 +17,6 @@
 package com.android.luogui.baselibrary.base;
 
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.TextView;
@@ -43,17 +42,17 @@ public abstract class BaseListActivity<T> extends ToolbarActivity<T> {
     protected BaseRecyclerAdapter<T> adapter;
     protected TextView tvEmpty;
     protected int initPage = 0;
-    private int currentPage ;
-    protected List<T> mList = new ArrayList<T>();
+    private int currentPage;
+    protected List<T> mList = new ArrayList<>();
     protected PtrClassicFrameLayout ptr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getViewId(), isShowTitle());
+        setContentView(setViewId(), isShowTitle());
         initView();
         setAdapter();
-        init();
+        initPtrLoad();
         setDivider();
         recyclerView.setAdapter(adapter);
         recyclerView.loadMoreFinish(false, true);
@@ -62,13 +61,14 @@ public abstract class BaseListActivity<T> extends ToolbarActivity<T> {
 
     /**
      * 自定义布局
+     *
      * @return layout_id
      */
-    protected int getViewId() {
+    protected int setViewId() {
         return R.layout.activity_base_list;
     }
 
-    protected boolean isShowTitle(){
+    protected boolean isShowTitle() {
         return true;
     }
 
@@ -85,7 +85,7 @@ public abstract class BaseListActivity<T> extends ToolbarActivity<T> {
     /**
      * init 上下拉
      */
-    protected void init() {
+    protected void initPtrLoad() {
         currentPage = initPage;
         recyclerView.setLoadMoreListener(new SwipeMenuRecyclerView.LoadMoreListener() {
             @Override
@@ -129,9 +129,10 @@ public abstract class BaseListActivity<T> extends ToolbarActivity<T> {
 
     /**
      * 设置加载更多 背景
+     *
      * @param loadMoreView load
      */
-    protected void setLoadMoreBg(DefineLoadMoreView loadMoreView){
+    protected void setLoadMoreBg(DefineLoadMoreView loadMoreView) {
 
     }
 
@@ -141,7 +142,6 @@ public abstract class BaseListActivity<T> extends ToolbarActivity<T> {
     protected abstract void setAdapter();
 
     /**
-     *
      * @param page 获取的页数
      */
     protected abstract void getDataList(int page);
@@ -149,6 +149,7 @@ public abstract class BaseListActivity<T> extends ToolbarActivity<T> {
 
     /**
      * setData
+     *
      * @param tempList list
      */
     protected void dispatch(List<T> tempList) {
@@ -173,15 +174,16 @@ public abstract class BaseListActivity<T> extends ToolbarActivity<T> {
                 recyclerView.loadMoreFinish(false, false);
             }
         }
-        currentPage ++;
+        currentPage++;
     }
 
     /**
      * showEmpty
+     *
      * @param visible visible
      */
-    protected void showEmpty(int visible){
-        if (null==tvEmpty) return;
+    protected void showEmpty(int visible) {
+        if (null == tvEmpty) return;
         tvEmpty.setVisibility(visible);
     }
 

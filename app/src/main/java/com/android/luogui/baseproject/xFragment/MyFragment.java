@@ -1,4 +1,4 @@
-package com.android.luogui.baseproject.XFragment;
+package com.android.luogui.baseproject.xFragment;
 
 import com.android.luogui.baselibrary.base.BaseListFragment;
 import com.android.luogui.baselibrary.netWork.retrofit.ApiClint;

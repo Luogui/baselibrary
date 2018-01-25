@@ -21,12 +21,24 @@ import com.android.luogui.baselibrary.base.BaseSlideListActivity;
 import com.android.luogui.baselibrary.base.adapter.BaseViewHolder;
 import com.android.luogui.baselibrary.base.adapter.SingleAdapter;
 import com.android.luogui.baselibrary.netWork.retrofit.ApiClint;
+import com.android.luogui.baselibrary.netWork.retrofit.HttpParse;
+import com.android.luogui.baselibrary.netWork.retrofit.TrustManager;
+import com.android.luogui.baselibrary.util.LogUtil;
+import com.android.luogui.baselibrary.util.StringUtil;
+import com.android.luogui.baseproject.bean.NewsBean;
 import com.android.luogui.baseproject.bean.NewsBean2;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
+import io.rx_cache2.DynamicKey;
+import io.rx_cache2.EvictDynamicKey;
 
 public class CatchRecordActivity extends BaseSlideListActivity<NewsBean2.ResBean> {
 
@@ -47,16 +59,18 @@ public class CatchRecordActivity extends BaseSlideListActivity<NewsBean2.ResBean
 
     @Override
     protected void getDataList(int i) {
-        ApiClint.createApi(ApiService.class)
-                .getString2(i, "性感")
+        Observable<NewsBean2> string3 = ApiClint.createApi(ApiService.class)
+                .getString3(i, "性感");
+        CacheProviders.getCache().
+                getString(string3, new DynamicKey("" + i), new EvictDynamicKey(false))
                 .map(newsBean2 -> {
-                    if (newsBean2.getStatus().equals("success")) {
-                        return newsBean2.getRes();
-                    }
+                    if (newsBean2==null) return new ArrayList<NewsBean2.ResBean>();
+                    if (newsBean2.getStatus().equals("success")) return newsBean2.getRes();
                     return new ArrayList<NewsBean2.ResBean>();
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .onErrorResumeNext(throwable -> observer -> LogUtil.toast("网络异常"))
                 .subscribe(resBeen -> dispatch(resBeen));
     }
 }

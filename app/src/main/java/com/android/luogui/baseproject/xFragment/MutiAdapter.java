@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.luogui.baseproject.XFragment;
+package com.android.luogui.baseproject.xFragment;
 
 import android.content.Context;
 

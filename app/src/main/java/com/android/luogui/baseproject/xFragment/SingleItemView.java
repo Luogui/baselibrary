@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.luogui.baseproject.XFragment;
+package com.android.luogui.baseproject.xFragment;
 
 import com.android.luogui.baselibrary.base.adapter.BaseViewHolder;
 import com.android.luogui.baselibrary.base.adapter.ItemViewDelegate;

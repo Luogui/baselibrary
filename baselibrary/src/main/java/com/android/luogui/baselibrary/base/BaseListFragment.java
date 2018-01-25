@@ -51,16 +51,16 @@ public abstract class BaseListFragment<T> extends Fragment {
     protected TextView tvEmpty;
     protected int initPage = 0;
     private int currentPage;
-    protected List<T> mList = new ArrayList<T>();
+    protected List<T> mList = new ArrayList<>();
     protected PtrClassicFrameLayout ptr;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = LayoutInflater.from(getContext()).inflate(getViewId(), container, false);
+        View view = LayoutInflater.from(getContext()).inflate(setViewId(), container, false);
         initView(view);
         setAdapter();
-        init();
+        initPtrLoad();
         setDivider();
         recyclerView.setAdapter(adapter);
         recyclerView.loadMoreFinish(false, true);
@@ -71,9 +71,10 @@ public abstract class BaseListFragment<T> extends Fragment {
 
     /**
      * 自定义布局
+     *
      * @return layout_id
      */
-    protected int getViewId() {
+    protected int setViewId() {
         return R.layout.activity_base_list;
     }
 
@@ -81,16 +82,16 @@ public abstract class BaseListFragment<T> extends Fragment {
      * initView
      */
     protected void initView(View view) {
-        ptr = (PtrClassicFrameLayout) view.findViewById(R.id.ptr);
-        recyclerView = (SwipeMenuRecyclerView) view.findViewById(R.id.recycler);
-        tvEmpty = (TextView) view.findViewById(R.id.tv_empty);
+        ptr = view.findViewById(R.id.ptr);
+        recyclerView = view.findViewById(R.id.recycler);
+        tvEmpty = view.findViewById(R.id.tv_empty);
     }
 
     /**
      * init 上下拉
      */
-    protected void init() {
-         currentPage = initPage;
+    protected void initPtrLoad() {
+        currentPage = initPage;
         recyclerView.setLoadMoreListener(new SwipeMenuRecyclerView.LoadMoreListener() {
             @Override
             public void onLoadMore() {
@@ -136,15 +137,14 @@ public abstract class BaseListFragment<T> extends Fragment {
     protected abstract void setAdapter();
 
     /**
-     *
      * @param page 获取的页数
      */
     protected abstract void getDataList(int page);
 
 
-
     /**
      * setData
+     *
      * @param tempList list
      */
     protected void dispatch(List<T> tempList) {
@@ -169,15 +169,16 @@ public abstract class BaseListFragment<T> extends Fragment {
                 recyclerView.loadMoreFinish(true, false);
             }
         }
-        currentPage ++;
+        currentPage++;
     }
 
     /**
      * showEmpty
+     *
      * @param visible visible
      */
-    protected void showEmpty(int visible){
-        if (null==tvEmpty) return;
+    protected void showEmpty(int visible) {
+        if (null == tvEmpty) return;
         tvEmpty.setVisibility(visible);
     }
 

@@ -7,7 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.android.luogui.baselibrary.util.DialogUtil;
-import com.android.luogui.baseproject.XFragment.XFragmentActivity;
+import com.android.luogui.baseproject.xFragment.XFragmentActivity;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 

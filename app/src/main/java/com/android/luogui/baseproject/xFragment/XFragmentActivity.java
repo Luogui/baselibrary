@@ -1,6 +1,5 @@
-package com.android.luogui.baseproject.XFragment;
+package com.android.luogui.baseproject.xFragment;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.android.luogui.baselibrary.base.SlideActivity;

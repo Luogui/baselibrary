@@ -28,4 +28,15 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("user/figure")
     Observable<NewsBean2> getString2(@Field("page") int page, @Field("type") String type);
+
+    @FormUrlEncoded
+    @POST("user/figure")
+    Observable<NewsBean2> getString3(@Field("page") int page, @Field("type") String type);
+
+    /**
+     * 获取发现页面数据
+     */
+    @FormUrlEncoded
+    @POST("user/figure")
+    Call<String> getFoundData(@Field("page") int page, @Field("type") String type);
 }

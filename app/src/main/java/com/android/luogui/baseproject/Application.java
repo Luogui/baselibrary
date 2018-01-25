@@ -1,7 +1,8 @@
 package com.android.luogui.baseproject;
 
-import com.android.luogui.baselibrary.MyApplication;
+import com.android.luogui.baselibrary.*;
 import com.android.luogui.baselibrary.netWork.retrofit.ApiClint;
+import com.android.luogui.baselibrary.util.LogUtil;
 
 /**
  * describe
@@ -15,5 +16,6 @@ public class Application extends MyApplication {
     public void onCreate() {
         super.onCreate();
         ApiClint.BASE_URL = "http://www.nnajlaw.com:5005/";
+        LogUtil.PRINT = BuildConfig.LOG_STATUS;
     }
 }

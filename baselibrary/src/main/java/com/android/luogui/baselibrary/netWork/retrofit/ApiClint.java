@@ -18,10 +18,14 @@ package com.android.luogui.baselibrary.netWork.retrofit;
 
 
 
+import android.os.Environment;
+
 import com.android.luogui.baselibrary.util.LogUtil;
 
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -53,9 +57,9 @@ public class ApiClint {
             //打印日志
             .addInterceptor(interceptor)
             //设置Cache拦截器
-            .addNetworkInterceptor(cacheInterceptor)
-            .addInterceptor(cacheInterceptor)
-            .cache(HttpCache.getCache())
+//            .addNetworkInterceptor(cacheInterceptor)
+//            .addInterceptor(cacheInterceptor)
+//            .cache(HttpCache.getCache())
             //time out
             .connectTimeout(TIMEOUT_CONNECTION, TimeUnit.SECONDS)
             .readTimeout(TIMEOUT_READ, TimeUnit.SECONDS)
