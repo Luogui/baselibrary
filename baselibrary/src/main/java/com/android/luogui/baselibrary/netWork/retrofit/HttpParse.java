@@ -45,7 +45,7 @@ public class HttpParse {
             JSONObject json = new JSONObject(content);
             String value = json.getString(key);
             return GsonUtil.getGson().fromJson(value,mClass);
-        } catch (JSONException |JsonSyntaxException |NullPointerException e) {
+        } catch (JSONException |JsonSyntaxException |NullPointerException |IllegalStateException e) {
             LogUtil.e(e.toString());
         }
         return null;
@@ -57,7 +57,7 @@ public class HttpParse {
             String value = json.getString(key);
             Type type = new ParamType(mClass);
             return GsonUtil.getGson().fromJson(value,type);
-        } catch (JSONException|JsonSyntaxException|NullPointerException e) {
+        } catch (JSONException|JsonSyntaxException|NullPointerException |IllegalStateException e) {
             LogUtil.e(e.toString());
         }
        return new ArrayList<>();

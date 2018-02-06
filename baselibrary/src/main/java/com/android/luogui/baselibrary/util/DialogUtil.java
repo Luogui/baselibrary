@@ -20,16 +20,10 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.text.InputFilter;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -37,9 +31,7 @@ import android.widget.TextView;
 import com.android.luogui.baselibrary.R;
 import com.android.luogui.baselibrary.ui.TipDialog;
 
-import java.util.List;
 
-import okhttp3.internal.Util;
 
 /**
  * Created by LG on 2017/1/6.
@@ -91,9 +83,9 @@ public class DialogUtil {
     public static Dialog showBottomDialog(Activity context, View view, String title) {
         final Dialog bottomDialog = new Dialog(context, R.style.ActionSheetDialogStyle);
         View contentView = LayoutInflater.from(context).inflate(R.layout.dialog_bottom_base_view, null);
-        TextView tvTitle = (TextView) contentView.findViewById(R.id.tv_title);
-        TextView tvCancel = (TextView) contentView.findViewById(R.id.tv_cancel);
-        LinearLayout bottomView = (LinearLayout) contentView.findViewById(R.id.bottomView);
+        TextView tvTitle = contentView.findViewById(R.id.tv_title);
+        TextView tvCancel = contentView.findViewById(R.id.tv_cancel);
+        LinearLayout bottomView = contentView.findViewById(R.id.bottomView);
         tvTitle.setText(title);
         tvCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,9 +119,9 @@ public class DialogUtil {
     public static void showMarginBottomDialog(Activity context, View view, String title, float width, float bottomWidth) {
         final Dialog bottomDialog = new Dialog(context, R.style.ActionSheetDialogStyle);
         View contentView = LayoutInflater.from(context).inflate(R.layout.dialog_bottom_base_view, null);
-        TextView tvTitle = (TextView) contentView.findViewById(R.id.tv_title);
-        TextView tvCancel = (TextView) contentView.findViewById(R.id.tv_cancel);
-        LinearLayout bottomView = (LinearLayout) contentView.findViewById(R.id.bottomView);
+        TextView tvTitle = contentView.findViewById(R.id.tv_title);
+        TextView tvCancel = contentView.findViewById(R.id.tv_cancel);
+        LinearLayout bottomView = contentView.findViewById(R.id.bottomView);
         tvTitle.setText(title);
         tvCancel.setOnClickListener(new View.OnClickListener() {
             @Override

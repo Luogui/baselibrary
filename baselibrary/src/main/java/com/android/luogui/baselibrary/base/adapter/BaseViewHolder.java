@@ -36,6 +36,8 @@ import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 /**
  * 描述： baseViewHolder
  * Created by LuoGui on 2017/3/7.
@@ -259,6 +261,11 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
         Checkable view = (Checkable) getView(viewId);
         view.setChecked(checked);
         return this;
+    }
+
+    public void setNetImage(int viewId, String path){
+        ImageView imageView = getView(viewId);
+        Glide.with(context).load(path).into(imageView);
     }
 
     /**
