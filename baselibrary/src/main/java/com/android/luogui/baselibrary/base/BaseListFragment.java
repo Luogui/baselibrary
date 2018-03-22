@@ -166,7 +166,7 @@ public abstract class BaseListFragment<T> extends Fragment {
                 adapter.addAll(tempList);
                 recyclerView.loadMoreFinish(false, true);
             } else {
-                recyclerView.loadMoreFinish(true, false);
+                recyclerView.loadMoreFinish(false, false);
             }
         }
         currentPage++;
