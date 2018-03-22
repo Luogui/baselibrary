@@ -28,7 +28,7 @@ import com.android.luogui.baselibrary.R;
 public class Constant {
 
     // 手机正则
-    public static final String TELEPHONE_REGEX = "^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[06-8])\\d{8}$";
+    public static final String TELEPHONE_REGEX = "^1(3[0-9]|4[57]|5[0-35-9]|6[0-9]|8[0-9]|7[06-8])\\d{8}$";
 
     public static String MONEY_UNIT = "RMB";
 

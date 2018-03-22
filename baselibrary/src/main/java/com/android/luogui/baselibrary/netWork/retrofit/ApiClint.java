@@ -18,14 +18,11 @@ package com.android.luogui.baselibrary.netWork.retrofit;
 
 
 
-import android.os.Environment;
 
 import com.android.luogui.baselibrary.util.LogUtil;
 
-import java.io.File;
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
