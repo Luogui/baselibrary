@@ -229,7 +229,6 @@ public class TipDialog extends Dialog {
                         if (negativeButtonClickListener != null) {
                             negativeButtonClickListener.onClick(dialog, DialogInterface.BUTTON_NEGATIVE);
                         }
-                        dialog.dismiss();
                     }
                 });
             }

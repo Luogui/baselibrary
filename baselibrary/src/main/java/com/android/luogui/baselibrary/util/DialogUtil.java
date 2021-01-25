@@ -59,13 +59,13 @@ public class DialogUtil {
         builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                dialogResult.result("1");
+                dialogResult.result(dialog, "1");
             }
         });
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                dialogResult.result("0");
+                dialogResult.result(dialog, "0");
                 dialog.dismiss();
             }
         });
@@ -140,7 +140,7 @@ public class DialogUtil {
     }
 
     public interface DialogResult {
-        void result(String s);
+        void result(DialogInterface dialog, String s);
     }
 
 }
