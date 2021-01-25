@@ -3,6 +3,7 @@ package com.android.luogui.baseproject;
 import com.android.luogui.baselibrary.*;
 import com.android.luogui.baselibrary.netWork.retrofit.ApiClint;
 import com.android.luogui.baselibrary.util.LogUtil;
+import com.arialyy.aria.core.Aria;
 
 /**
  * describe
@@ -17,5 +18,9 @@ public class Application extends MyApplication {
         super.onCreate();
         ApiClint.BASE_URL = "http://www.nnajlaw.com:5005/";
         LogUtil.PRINT = BuildConfig.LOG_STATUS;
+
+        Aria.init(this);
     }
+
+
 }

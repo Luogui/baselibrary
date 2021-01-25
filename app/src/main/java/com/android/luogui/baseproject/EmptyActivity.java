@@ -16,11 +16,17 @@
 
 package com.android.luogui.baseproject;
 
+import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+import android.view.WindowManager;
 
 import com.android.luogui.baselibrary.base.SlideActivity;
 
 public class EmptyActivity extends SlideActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

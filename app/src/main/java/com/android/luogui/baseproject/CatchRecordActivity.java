@@ -17,6 +17,8 @@
 package com.android.luogui.baseproject;
 
 
+import android.annotation.SuppressLint;
+
 import com.android.luogui.baselibrary.base.BaseSlideListActivity;
 import com.android.luogui.baselibrary.base.adapter.BaseViewHolder;
 import com.android.luogui.baselibrary.base.adapter.SingleAdapter;
@@ -57,6 +59,7 @@ public class CatchRecordActivity extends BaseSlideListActivity<NewsBean2.ResBean
     }
 
 
+    @SuppressLint("CheckResult")
     @Override
     protected void getDataList(int i) {
         Observable<NewsBean2> string3 = ApiClint.createApi(ApiService.class)

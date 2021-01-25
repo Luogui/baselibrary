@@ -72,4 +72,5 @@ public class TestMultiAdapter extends BaseRecyclerAdapter<NewsBean> {
         ImageViewHolder viewHolder = (ImageViewHolder) holder;
         viewHolder.setValue(newsBean);
     }
+
 }

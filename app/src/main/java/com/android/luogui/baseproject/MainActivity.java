@@ -1,15 +1,23 @@
 package com.android.luogui.baseproject;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.android.luogui.baselibrary.MyApplication;
+import com.android.luogui.baselibrary.RuntimePermissions.PermissionsManager;
+import com.android.luogui.baselibrary.RuntimePermissions.PermissionsResultAction;
 import com.android.luogui.baselibrary.netWork.retrofit.ApiClint;
 import com.android.luogui.baselibrary.util.DialogUtil;
 import com.android.luogui.baselibrary.util.LogUtil;
+import com.android.luogui.baseproject.down.DownActivity;
 import com.android.luogui.baseproject.xFragment.XFragmentActivity;
+import com.arialyy.aria.core.Aria;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 
@@ -45,6 +53,24 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, getList()));
         listView.setOnItemClickListener((adapterView, view, i, l) -> toStart(i));
 
+        PermissionsManager.getInstance().
+                requestPermissionsIfNecessaryForResult(MainActivity.this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE
+                                , Manifest.permission.READ_EXTERNAL_STORAGE},
+                        new PermissionsResultAction() {
+                            @Override
+                            public void onGranted() {
+                                LogUtil.i("123456");
+//                                finish();
+                            }
+
+                            @Override
+                            public void onDenied(String permission) {
+                                LogUtil.i("789456");
+//                                startActivity(new Intent(context, MainActivity.class));
+//                                finish();
+                            }
+                        });
         //http://photos.shangweiled.com/figure_2015a_0444_01.jpg,http://photos.shangweiled.com/figure_2015a_0444_02.jpg,http://photos.shangweiled.com/figure_2015a_0444_03.jpg,http://photos.shangweiled.com/figure_2015a_0444_04.jpg,http://photos.shangweiled.com/figure_2015a_0444_05.jpg,http://photos.shangweiled.com/figure_2015a_0444_06.jpg
 
     }
@@ -90,7 +116,36 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
                 break;
+            case 6:
+                statDown();
+                break;
+            case 7:
+                startActivity(new Intent(MainActivity.this, DownActivity.class));
+                break;
 //                http://www.nnajlaw.com:5005/user/header
+        }
+    }
+
+
+    private void statDown(){
+        String path = Environment.getExternalStorageDirectory() + "/" + MyApplication.getInstance().getString(R.string.app_name) + "/";
+        String[] downArr = {
+                "http://p8srlm46t.bkt.clouddn.com/05-%E8%A3%85%E9%A5%B0%E5%99%A8.flv",
+                "http://p8srlm46t.bkt.clouddn.com/01-%E8%BF%AD%E4%BB%A3%E5%99%A8.flv",
+                "http://p8srlm46t.bkt.clouddn.com/04-%E9%97%AD%E5%8C%85-%E5%BA%94%E7%94%A8.flv",
+                "http://p8srlm46t.bkt.clouddn.com/02-%E9%97%AD%E5%8C%85.flv"
+        };
+        for (int i = 0; i < downArr.length; i++) {
+
+            path =   path + "A/";
+            File file = new File(path);
+            if (!file.exists()) file.mkdirs();
+            path = path + i +  ".flv";
+
+            Aria.download(this)
+                    .load(downArr[i])     //读取下载地址
+                    .setFilePath(path) //设置文件保存的完整路径
+                    .start();
         }
     }
 
@@ -108,7 +163,15 @@ public class MainActivity extends AppCompatActivity {
         arrayList.add("test");
         arrayList.add("test2");
         arrayList.add("AddHeader");
+        arrayList.add("fileDown");
+        arrayList.add("fileDownList");
         return arrayList;
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        PermissionsManager.getInstance().notifyPermissionsChange(permissions, grantResults);
     }
 
 

@@ -50,4 +50,9 @@ public interface ApiService {
     @Multipart
     @POST("user/header")
     Call<String> upHeader(@Query("uid") String uid, @Part MultipartBody.Part requestBody);
+    /**
+     * 上传头像
+     */
+    @GET("api/phone/home")
+    Call<String> getHome();
 }

@@ -156,7 +156,7 @@ public abstract class BaseSlideListActivity<T> extends SlideActivity<T> {
             adapter.addAll(tempList);
             if (tempList.size() == 0) {
                 //无数据
-                recyclerView.loadMoreFinish(true, false);
+                recyclerView.loadMoreFinish(false, false);
                 showEmpty(View.VISIBLE);
             } else {
                 //有数据
