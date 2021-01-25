@@ -69,7 +69,8 @@
             android:layout_weight="1"
             android:background="@color/gray_bg"
             android:lines="1"
-            android:textColor="@color/white"
+            android:text="取消"
+            android:textColor="@color/black_text"
             android:textSize="@dimen/text_medium" />
 
         <Button
