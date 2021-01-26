@@ -24,6 +24,7 @@ import com.android.luogui.baselibrary.base.adapter.BaseViewHolder;
 import com.android.luogui.baselibrary.base.adapter.SingleAdapter;
 import com.android.luogui.baselibrary.netWork.retrofit.ApiClint;
 import com.android.luogui.baselibrary.netWork.retrofit.HttpParse;
+import com.android.luogui.baselibrary.netWork.retrofit.ResultCallBack;
 import com.android.luogui.baselibrary.netWork.retrofit.TrustManager;
 import com.android.luogui.baselibrary.util.LogUtil;
 import com.android.luogui.baselibrary.util.StringUtil;
@@ -62,18 +63,32 @@ public class CatchRecordActivity extends BaseSlideListActivity<NewsBean2.ResBean
     @SuppressLint("CheckResult")
     @Override
     protected void getDataList(int i) {
-        Observable<NewsBean2> string3 = ApiClint.createApi(ApiService.class)
-                .getString3(i, "性感");
-        CacheProviders.getCache().
-                getString(string3, new DynamicKey("" + i), new EvictDynamicKey(false))
-                .map(newsBean2 -> {
-                    if (newsBean2==null) return new ArrayList<NewsBean2.ResBean>();
-                    if (newsBean2.getStatus().equals("success")) return newsBean2.getRes();
-                    return new ArrayList<NewsBean2.ResBean>();
-                })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .onErrorResumeNext(throwable -> observer -> LogUtil.toast("网络异常"))
-                .subscribe(resBeen -> dispatch(resBeen));
+
+        ApiClint.createApi(ApiService.class)
+                .addArea("areaName", 0, 1, "desc")
+                .enqueue(new ResultCallBack<String>("data") {
+                    @Override
+                    public void onSuccess(String s) {
+                        LogUtil.toast("新增成功");
+                    }
+                    @Override
+                    public void onFailed(int code, String s) {
+                        LogUtil.toast("新增失败");
+                    }
+                });
+//
+//        Observable<NewsBean2> string3 = ApiClint.createApi(ApiService.class)
+//                .getString3(i, "性感");
+//        CacheProviders.getCache().
+//                getString(string3, new DynamicKey("" + i), new EvictDynamicKey(false))
+//                .map(newsBean2 -> {
+//                    if (newsBean2==null) return new ArrayList<NewsBean2.ResBean>();
+//                    if (newsBean2.getStatus().equals("success")) return newsBean2.getRes();
+//                    return new ArrayList<NewsBean2.ResBean>();
+//                })
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .onErrorResumeNext(throwable -> observer -> LogUtil.toast("网络异常"))
+//                .subscribe(resBeen -> dispatch(resBeen));
     }
 }

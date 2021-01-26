@@ -16,7 +16,7 @@ public class Application extends MyApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        ApiClint.BASE_URL = "http://www.nnajlaw.com:5005/";
+        ApiClint.BASE_URL = "http://localhost/";
         LogUtil.PRINT = BuildConfig.LOG_STATUS;
 
         Aria.init(this);

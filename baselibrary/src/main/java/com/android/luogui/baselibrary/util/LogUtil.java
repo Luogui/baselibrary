@@ -18,7 +18,6 @@ package com.android.luogui.baselibrary.util;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.Environment;
 import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
@@ -30,11 +29,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -68,8 +62,6 @@ public class LogUtil {
             else {
                 Log.v(TAG + "-" + Tag, msg + "     " + tag);
             }
-            if (PRINT)
-                print(tag + "&" + msg);
         }
     }
 
@@ -90,8 +82,6 @@ public class LogUtil {
             else {
                 Log.d(TAG + "-" + Tag, new StringBuilder().append(msg).append("     ").append(tag).toString());
             }
-            if (PRINT)
-                print(tag + "&" + msg);
         }
     }
 
@@ -111,8 +101,6 @@ public class LogUtil {
             else {
                 Log.i(TAG + "-" + Tag, msg + "     " + tag);
             }
-            if (PRINT)
-                print(tag + "&" + msg);
         }
     }
 
@@ -129,8 +117,6 @@ public class LogUtil {
             else {
                 Log.w(new StringBuilder().append(TAG).append("-").append(Tag).toString(), new StringBuilder().append(msg).append("     ").append(tag).toString());
             }
-            if (PRINT.booleanValue())
-                print(new StringBuilder().append(tag).append("&").append(msg).toString());
         }
     }
 
@@ -147,8 +133,6 @@ public class LogUtil {
             else {
                 Log.e(new StringBuilder().append(TAG).append("-").append(Tag).toString(), new StringBuilder().append(msg).append("     ").append(tag).toString());
             }
-            if (PRINT.booleanValue())
-                print(new StringBuilder().append(tag).append("&").append(msg).toString());
         }
     }
 
@@ -169,8 +153,6 @@ public class LogUtil {
             else {
                 Log.e(new StringBuilder().append(TAG).append("-").append(Tag).toString(), new StringBuilder().append(msg).append("     ").append(tag).toString(), tr);
             }
-            if (PRINT.booleanValue())
-                print(new StringBuilder().append(tag).append("&").append(msg).toString(), tr);
         }
     }
 
@@ -226,8 +208,6 @@ public class LogUtil {
         StackTraceElement[] stackTraceElement = Thread.currentThread().getStackTrace();
         String tag = getTagInfo(stackTraceElement);
         Log.i(new StringBuilder().append(TAG).append("-").append(Tag).toString(), new StringBuilder().append(msg).append("     ").append(tag).toString());
-        if (PRINT.booleanValue())
-            print(new StringBuilder().append("Toast:").append(tag).append("&").append(msg).toString());
     }
 
     public static void toast(Context context, int resurceId) {
@@ -289,33 +269,9 @@ public class LogUtil {
         return builder.toString();
     }
 
-    private static void print(String msg) {
-        Date currentTime = new Date();
-        String currentTimeStamp = new SimpleDateFormat("yyyy_MM_dd_HH:mm:ss").format(currentTime);
 
-        String filename = new StringBuilder().append(fileName).append(".txt").toString();
-        String localPath = new StringBuilder().append(Environment.getExternalStorageDirectory().getPath()).append("/DEBUG").append(fileName).toString();
-        File file1 = new File(localPath);
-        if (!file1.exists()) {
-            file1.mkdirs();
-        }
-        String msagement = new StringBuilder().append(currentTimeStamp).append("&").append(msg).append("\n").toString();
-        try {
-            BufferedWriter bos = new BufferedWriter(new FileWriter(new StringBuilder().append(localPath).append("/").append(filename).toString()));
-
-            bos.write(msagement);
-            bos.flush();
-            bos.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void print(String msg, Throwable tr) {
-        print(new StringBuilder().append(msg).append("&Throwable:").append(tr.getMessage()).toString());
-    }
 
     public static void setPRINT(Boolean PRINT) {
-        PRINT = PRINT;
+        LogUtil.PRINT = PRINT;
     }
 }

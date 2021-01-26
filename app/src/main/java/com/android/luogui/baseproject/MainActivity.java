@@ -1,6 +1,7 @@
 package com.android.luogui.baseproject;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -88,9 +89,10 @@ public class MainActivity extends AppCompatActivity {
             case 2:
                 DialogUtil.showTip(this, "提示", "是否兑换", new DialogUtil.DialogResult() {
                     @Override
-                    public void result(String s) {
+                    public void result(DialogInterface dialog, String s) {
 
                     }
+
                 });
                 break;
             case 3:

@@ -55,4 +55,11 @@ public interface ApiService {
      */
     @GET("api/phone/home")
     Call<String> getHome();
+
+    @FormUrlEncoded
+    @POST("area/addArea")
+    Call<String>  addArea(@Field("areaName") String areaName,
+                          @Field("areaName") int areaSex,
+                          @Field("areaName") int num,
+                          @Field("areaDesc") String areaDesc);
 }
