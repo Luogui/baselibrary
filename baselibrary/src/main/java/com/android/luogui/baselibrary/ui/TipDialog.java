@@ -45,8 +45,8 @@ public class TipDialog extends Dialog {
     }
 
     @Override
-    public void setCanceledOnTouchOutside(boolean cancel) {
-        super.setCanceledOnTouchOutside(true);
+    public void setCanceledOnTouchOutside(boolean flag) {
+        super.setCanceledOnTouchOutside(flag);
     }
 
     /**
