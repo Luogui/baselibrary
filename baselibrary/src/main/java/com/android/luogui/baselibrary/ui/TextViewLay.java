@@ -103,6 +103,10 @@ public class TextViewLay extends LinearLayout {
         return tvRight.getText().toString();
     }
 
+    public TextView setRightTextView(){
+        return tvRight;
+    }
+
     public void setRightGravity(int gravity){
         tvRight.setGravity(Gravity.CENTER_VERTICAL | gravity);
     }
