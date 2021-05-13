@@ -103,7 +103,7 @@ public class TextViewLay extends LinearLayout {
         return tvRight.getText().toString();
     }
 
-    public TextView setRightTextView(){
+    public TextView getRightTextView(){
         return tvRight;
     }
 
