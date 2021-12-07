@@ -205,6 +205,14 @@ public class TipDialog extends Dialog {
             this.btnSure = btnSure;
         }
 
+        public TipDialog getDialog() {
+            return dialog;
+        }
+
+        public void setDialog(TipDialog dialog) {
+            this.dialog = dialog;
+        }
+
         public TipDialog create() {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             dialog = new TipDialog(context,style);
