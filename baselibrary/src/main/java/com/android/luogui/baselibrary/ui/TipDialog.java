@@ -73,6 +73,8 @@ public class TipDialog extends Dialog {
         private float messageTextSize;    //消息文字大小
         private TipDialog dialog;
         private int style;
+        Button btnCancel;
+        Button btnSure;
 
 
         private OnClickListener positiveButtonClickListener, negativeButtonClickListener;
@@ -187,6 +189,22 @@ public class TipDialog extends Dialog {
             dialog.dismiss();
         }
 
+        public Button getBtnCancel() {
+            return btnCancel;
+        }
+
+        public void setBtnCancel(Button btnCancel) {
+            this.btnCancel = btnCancel;
+        }
+
+        public Button getBtnSure() {
+            return btnSure;
+        }
+
+        public void setBtnSure(Button btnSure) {
+            this.btnSure = btnSure;
+        }
+
         public TipDialog create() {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             dialog = new TipDialog(context,style);
@@ -194,8 +212,8 @@ public class TipDialog extends Dialog {
             View layout = inflater.inflate(R.layout.dialog_tip, null);
             dialog.addContentView(layout, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
             TextView tvTitle = (TextView) layout.findViewById(R.id.dialog_title);
-            Button btnCancel = (Button) layout.findViewById(R.id.positiveButton);
-            Button btnSure = (Button) layout.findViewById(R.id.negativeButton);
+            btnCancel = (Button) layout.findViewById(R.id.positiveButton);
+            btnSure = (Button) layout.findViewById(R.id.negativeButton);
             View vLine = layout.findViewById(R.id.dialog_line);
             TextView tvMessage = (TextView) layout.findViewById(R.id.dialog_message);
             if (title==null|| title.isEmpty()){
