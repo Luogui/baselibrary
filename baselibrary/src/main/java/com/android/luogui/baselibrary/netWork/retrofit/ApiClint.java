@@ -49,8 +49,8 @@ public class ApiClint {
     private static CacheInterceptor cacheInterceptor = new CacheInterceptor();
     private static OkHttpClient okHttpClient = new OkHttpClient.Builder()
             //SSL证书
-            .sslSocketFactory(TrustManager.getUnsafeOkHttpClient())
-            .hostnameVerifier(org.apache.http.conn.ssl.SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
+//            .sslSocketFactory(TrustManager.getUnsafeOkHttpClient())
+//            .hostnameVerifier(org.apache.http.conn.ssl.SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
             //打印日志
             .addInterceptor(interceptor)
             //设置Cache拦截器
@@ -69,8 +69,8 @@ public class ApiClint {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
                 .client(okHttpClient)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
         return retrofit.create(clazz);
     }
@@ -99,6 +99,27 @@ public class ApiClint {
                 .baseUrl(BASE_URL)
                 .client(okHttpClient)
                 .addConverterFactory(ScalarsConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build();
+        return retrofit.create(clazz);
+    }
+
+    public static <T> T createJsonApiString(Class<T> clazz, String url) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .client(okHttpClient)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        return retrofit.create(clazz);
+    }
+
+    public static <T> T createJsonApiString(Class<T> clazz) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .client(okHttpClient)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
         return retrofit.create(clazz);
     }
