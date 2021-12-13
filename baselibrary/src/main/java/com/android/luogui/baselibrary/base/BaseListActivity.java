@@ -42,7 +42,7 @@ public abstract class BaseListActivity<T> extends ToolbarActivity<T> {
     protected BaseRecyclerAdapter<T> adapter;
     protected TextView tvEmpty;
     protected int initPage = 0;
-    private int currentPage;
+    protected int currentPage;
     protected List<T> mList = new ArrayList<>();
     protected PtrClassicFrameLayout ptr;
 
