@@ -7,6 +7,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
 
+   <com.android.luogui.baseproject.ProgressView
+       android:id="@+id/lv"
+       android:layout_width="match_parent"
+       android:layout_height="20dp"/>
+
    <ListView
        android:divider="@color/black"
        android:dividerHeight="1dp"

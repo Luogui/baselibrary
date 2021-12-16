@@ -10,12 +10,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.alibaba.fastjson.JSONObject;
 import com.android.luogui.baselibrary.MyApplication;
 import com.android.luogui.baselibrary.RuntimePermissions.PermissionsManager;
 import com.android.luogui.baselibrary.RuntimePermissions.PermissionsResultAction;
 import com.android.luogui.baselibrary.netWork.retrofit.ApiClint;
 import com.android.luogui.baselibrary.util.DialogUtil;
 import com.android.luogui.baselibrary.util.LogUtil;
+import com.android.luogui.baseproject.bean.BuyInHouseBean;
 import com.android.luogui.baseproject.down.DownActivity;
 import com.android.luogui.baseproject.xFragment.XFragmentActivity;
 import com.arialyy.aria.core.Aria;
@@ -37,18 +39,51 @@ public class MainActivity extends AppCompatActivity {
 
     private IUiListener loginListener;
     private QQLogin qqLogin;
-
     private ListView listView;
+    private ProgressView lv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 
+        BuyInHouseBean buyInHouseBean = new BuyInHouseBean();
+        buyInHouseBean.setSerialNumber("1");
+        buyInHouseBean.setItemNumber("2");
+        buyInHouseBean.setQty(3);
+        buyInHouseBean.setInvCode("selectHouseBean.getInvCode()");
+        buyInHouseBean.setVenderCode("selectSupplierBean.getVenderCode()");
+
+
+        ApiClint.createJsonApiString(ApiService.class)
+                .buyInHouse(ApiService.header, buyInHouseBean)
+                .enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        int code = jsonObject.getIntValue("code");
+                        if (code != 200) {
+                            LogUtil.toast(jsonObject.getString("message"));
+                            return;
+                        }else {
+                            LogUtil.toast(jsonObject.getString("message"));
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+
+                    }
+                });
+
+
         setContentView(R.layout.activity_main);
 
         qqLogin = new QQLogin(MainActivity.this);
         loginListener = qqLogin.getLoginListener();
+        lv = findViewById(R.id.lv);
+
+        lv.setProgress(50);
+
 
         listView = findViewById(R.id.listView);
         listView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, getList()));

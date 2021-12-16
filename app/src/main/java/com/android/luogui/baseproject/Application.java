@@ -16,7 +16,7 @@ public class Application extends MyApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        ApiClint.BASE_URL = "http://localhost/";
+        ApiClint.BASE_URL = "https://yh.51shoop.com/jeecg-boot/";
         LogUtil.PRINT = BuildConfig.LOG_STATUS;
 
         Aria.init(this);

@@ -66,7 +66,7 @@ dependencies {
     implementation 'com.android.support:design:27.1.1'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     testImplementation 'junit:junit:4.12'
-
+    implementation 'com.alibaba:fastjson:1.1.70.android'
     implementation 'com.arialyy.aria:aria-core:3.4.1'
     annotationProcessor 'com.arialyy.aria:aria-compiler:3.4.1'
     api project(':baselibrary')

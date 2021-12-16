@@ -1,6 +1,7 @@
 package com.android.luogui.baseproject;
 
 
+import com.android.luogui.baseproject.bean.BuyInHouseBean;
 import com.android.luogui.baseproject.bean.NewsBean;
 import com.android.luogui.baseproject.bean.NewsBean2;
 
@@ -9,9 +10,11 @@ import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -24,6 +27,11 @@ import retrofit2.http.Url;
  */
 
 public interface ApiService {
+
+
+    String header = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleH" +
+            "AiOjE2Mzg5NTUyOTUsInVzZXJuYW1lIjoiYW" +
+            "RtaW4ifQ.TM7NvjsLo9pZRv-YgvhB74Yphu-shGlhT_VV9EDgWfY";
 
     @FormUrlEncoded
     @POST("user/figure")
@@ -58,8 +66,17 @@ public interface ApiService {
 
     @FormUrlEncoded
     @POST("area/addArea")
-    Call<String>  addArea(@Field("areaName") String areaName,
+    Observable<String>  addArea(@Field("areaName") String areaName,
                           @Field("areaName") int areaSex,
                           @Field("areaName") int num,
                           @Field("areaDesc") String areaDesc);
+
+
+    /**
+     * 采购入库
+     * @return
+     */
+    @POST("business/invMisc/add")
+    Call<String> buyInHouse(@Header("X-Access-Token") String header,
+                            @Body BuyInHouseBean buyInHouseBean);
 }

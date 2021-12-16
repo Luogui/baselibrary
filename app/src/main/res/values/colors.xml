@@ -3,4 +3,7 @@
     <color name="colorPrimary">#FF4081</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="mask_progress_bg">#0685F0</color>
+    <color name="mask_progress">#F4B303</color>
 </resources>

@@ -15,7 +15,7 @@
     <color name="colorMainBackground">#e1e4e6</color>
 
     <!--按钮 没按-->
-    <color name="btn_normal">#0cb19c</color>
+    <color name="btn_normal">#09CA12</color>
     <!--按钮 按下了-->
     <color name="btn_click">#008c7a</color>
 

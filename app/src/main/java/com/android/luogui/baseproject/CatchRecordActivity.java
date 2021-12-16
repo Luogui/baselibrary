@@ -26,6 +26,7 @@ import com.android.luogui.baselibrary.netWork.retrofit.ApiClint;
 import com.android.luogui.baselibrary.netWork.retrofit.HttpParse;
 import com.android.luogui.baselibrary.netWork.retrofit.ResultCallBack;
 import com.android.luogui.baselibrary.netWork.retrofit.TrustManager;
+import com.android.luogui.baselibrary.ui.TipDialog;
 import com.android.luogui.baselibrary.util.LogUtil;
 import com.android.luogui.baselibrary.util.StringUtil;
 import com.android.luogui.baseproject.bean.NewsBean;
@@ -42,6 +43,9 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import io.rx_cache2.DynamicKey;
 import io.rx_cache2.EvictDynamicKey;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CatchRecordActivity extends BaseSlideListActivity<NewsBean2.ResBean> {
 
@@ -66,16 +70,16 @@ public class CatchRecordActivity extends BaseSlideListActivity<NewsBean2.ResBean
 
         ApiClint.createApi(ApiService.class)
                 .addArea("areaName", 0, 1, "desc")
-                .enqueue(new ResultCallBack<String>("data") {
-                    @Override
-                    public void onSuccess(String s) {
-                        LogUtil.toast("新增成功");
-                    }
-                    @Override
-                    public void onFailed(int code, String s) {
-                        LogUtil.toast("新增失败");
-                    }
-                });
+                .map(s -> {
+                    LogUtil.i("aaaaaaaaaaaaa" + s);
+                    return s;
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .onErrorResumeNext(throwable -> observer -> LogUtil.toast("网络异常"))
+                .subscribe(
+                        s -> LogUtil.toast(s)
+                );
 //
 //        Observable<NewsBean2> string3 = ApiClint.createApi(ApiService.class)
 //                .getString3(i, "性感");

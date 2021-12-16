@@ -21,6 +21,7 @@ package com.android.luogui.baselibrary.netWork.retrofit;
 
 import com.android.luogui.baselibrary.util.LogUtil;
 
+import java.net.Proxy;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -53,6 +54,8 @@ public class ApiClint {
 //            .hostnameVerifier(org.apache.http.conn.ssl.SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
             //打印日志
             .addInterceptor(interceptor)
+            //禁用抓包工具
+            .proxy(Proxy.NO_PROXY)
             //设置Cache拦截器
 //            .addNetworkInterceptor(cacheInterceptor)
 //            .addInterceptor(cacheInterceptor)
